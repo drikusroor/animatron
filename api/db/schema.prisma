@@ -16,3 +16,53 @@ model UserExample {
   email String  @unique
   name  String?
 }
+
+model Animation {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  description       String?
+  uuid              String              @unique
+  revisions         AnimationRevision[] @relation("revisions")
+  currentRevisionId Int?
+}
+
+model AnimationRevision {
+  id          Int                      @id @default(autoincrement())
+  name        String
+  description String?
+  uuid        String                   @unique @default(uuid())
+  animationId Int
+  animation   Animation                @relation("revisions", fields: [animationId], references: [id])
+  version     Int
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+  layers      AnimationRevisionLayer[]
+}
+
+model AnimationRevisionLayer {
+  id          Int                           @id @default(autoincrement())
+  name        String
+  description String?
+  uuid        String                        @unique @default(uuid())
+  revisionId  Int
+  revision    AnimationRevision             @relation(fields: [revisionId], references: [id])
+  version     Int
+  createdAt   DateTime                      @default(now())
+  updatedAt   DateTime                      @updatedAt
+  sortNumber  Int
+  image       String
+  css         String
+  style       String
+  html        String
+  frames      AnimationRevisionLayerFrame[]
+}
+
+model AnimationRevisionLayerFrame {
+  id      Int                    @id @default(autoincrement())
+  uuid    String                 @unique @default(uuid())
+  layerId Int
+  layer   AnimationRevisionLayer @relation(fields: [layerId], references: [id])
+  css     String
+  style   String
+  html    String
+}
