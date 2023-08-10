@@ -2,7 +2,7 @@ import { IKeyframe } from '../../types/keyframe.interface'
 
 interface KeyframeAnchorProps {
   keyframe: IKeyframe
-  rounded: boolean
+  rounded?: boolean
 }
 
 const KeyframeAnchor = ({ rounded = true }: KeyframeAnchorProps) => {
