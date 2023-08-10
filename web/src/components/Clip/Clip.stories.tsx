@@ -15,27 +15,39 @@ import type { ComponentMeta } from '@storybook/react'
 
 import Clip from './Clip'
 
-export const generated = () => {
-  const clip = {
-    id: 0,
-    start: 5,
-    keyframes: [
-      {
-        id: 1,
-        duration: 5,
-      },
-      {
-        id: 2,
-        duration: 11,
-      },
-      {
-        id: 3,
-        duration: 3,
-      },
-    ],
-  }
+const clip = {
+  id: 0,
+  start: 5,
+  keyframes: [
+    {
+      id: 1,
+      duration: 5,
+    },
+    {
+      id: 2,
+      duration: 11,
+    },
+    {
+      id: 3,
+      duration: 3,
+    },
+    {
+      id: -1,
+      duration: 0,
+    },
+  ],
+}
 
+export const generated = () => {
   return <Clip clip={clip} />
+}
+
+export const onGrayBackground = () => {
+  return (
+    <div className="bg-gray-800">
+      <Clip clip={clip} />
+    </div>
+  )
 }
 
 export default {
