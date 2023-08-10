@@ -26,6 +26,19 @@ export const generated = () => {
   return <Keyframe keyframe={keyframe} />
 }
 
+export const onGrayBackground = () => {
+  const keyframe: IKeyframe = {
+    id: 1,
+    duration: 5,
+  }
+
+  return (
+    <div className="bg-gray-800">
+      <Keyframe keyframe={keyframe} />
+    </div>
+  )
+}
+
 export default {
   title: 'Components/Keyframe',
   component: Keyframe,
