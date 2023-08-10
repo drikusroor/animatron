@@ -8,7 +8,12 @@ import KeyframeSpan from './KeyframeSpan'
 describe('KeyframeSpan', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<KeyframeSpan />)
+      const keyframe = {
+        id: 1,
+        duration: 10,
+      }
+
+      render(<KeyframeSpan keyframe={keyframe} />)
     }).not.toThrow()
   })
 })

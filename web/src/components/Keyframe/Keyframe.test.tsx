@@ -8,7 +8,12 @@ import Keyframe from './Keyframe'
 describe('Keyframe', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<Keyframe />)
+      const keyframe = {
+        id: 1,
+        duration: 10,
+      }
+
+      render(<Keyframe keyframe={keyframe} />)
     }).not.toThrow()
   })
 })
