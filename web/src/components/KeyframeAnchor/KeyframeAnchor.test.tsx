@@ -8,7 +8,12 @@ import KeyframeAnchor from './KeyframeAnchor'
 describe('KeyframeAnchor', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<KeyframeAnchor />)
+      const keyframe = {
+        id: 1,
+        duration: 10,
+      }
+
+      render(<KeyframeAnchor keyframe={keyframe} />)
     }).not.toThrow()
   })
 })
