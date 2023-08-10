@@ -10,7 +10,7 @@ const Keyframe = ({ keyframe }: KeyframeProps) => {
   return (
     <div className="relative flex h-8 flex-row items-center">
       <KeyframeAnchor keyframe={keyframe} />
-      <KeyframeSpan keyframe={keyframe} />
+      {keyframe.duration > 0 && <KeyframeSpan keyframe={keyframe} />}
     </div>
   )
 }
