@@ -1,6 +1,12 @@
-# README
+![build](https://github.com/drikusroor/animatron/actions/workflows/ci.yml/badge.svg)
 
-Welcome to [RedwoodJS](https://redwoodjs.com)!
+# Animatron 🎞️
+
+Animatron is the direct successor to [Animone](https://github.com/drikusroor/animone), a web application that helps you to create CSS animations with an intuitive UI.
+
+## Getting started
+
+Animatron is built using the [RedwoodJS App Framework](https://redwoodjs.com/). To run Animatron on your own machine, following the RedwoodJS documentation should be sufficient so I've copied it to here below:
 
 > **Prerequisites**
 >
