@@ -7,6 +7,7 @@ import Track from './Track'
 
 const track = {
   id: 1,
+  name: 'Track',
   clips: [
     {
       id: 1,
