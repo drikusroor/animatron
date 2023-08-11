@@ -13,10 +13,12 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
+import { keyframe } from 'src/__mocks__/mockData'
+
 import KeyframeSpan from './KeyframeSpan'
 
 export const generated = () => {
-  return <KeyframeSpan />
+  return <KeyframeSpan keyframe={keyframe} />
 }
 
 export default {
