@@ -11,8 +11,6 @@
 //
 // See https://storybook.js.org/docs/react/writing-stories/args.
 
-import type { ComponentMeta } from '@storybook/react'
-
 import { keyframe } from 'src/__mocks__/mockData'
 
 import KeyframeAnchor from './KeyframeAnchor'
@@ -21,7 +19,11 @@ export const generated = () => {
   return <KeyframeAnchor keyframe={keyframe} />
 }
 
+export const DiamondShape = () => {
+  return <KeyframeAnchor keyframe={keyframe} rounded={false} />
+}
+
 export default {
   title: 'Components/KeyframeAnchor',
   component: KeyframeAnchor,
-} as ComponentMeta<typeof KeyframeAnchor>
+}
