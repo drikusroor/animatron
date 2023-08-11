@@ -14,10 +14,9 @@ const Track = ({ track }: ITrackProps) => {
   return (
     <div
       style={{ ...backgroundColor, ...height }}
-      className="flex bg-slate-700"
+      className="flex gap-3 bg-slate-700"
     >
       <TrackDetails track={track} />
-      <div className="w-4"></div>
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
           <Clip key={index} clip={clip} />
