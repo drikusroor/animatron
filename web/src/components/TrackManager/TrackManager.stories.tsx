@@ -68,7 +68,6 @@ export const WithSmallContainer: Story = {
         createTrack({
           id: i + 4,
           name: `Track ${i + 4}`,
-          color: '#000000',
         })
       ),
     ],
@@ -78,7 +77,7 @@ export const WithSmallContainer: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ maxWidth: '640px', height: '240px', overflow: 'auto' }}>
+      <div style={{ maxWidth: '720px', height: '240px', overflow: 'auto' }}>
         <Story />
       </div>
     ),
