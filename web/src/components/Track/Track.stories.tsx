@@ -57,3 +57,21 @@ export const Primary: Story = {
     track,
   },
 }
+
+export const WithColor: Story = {
+  args: {
+    track: {
+      ...track,
+      color: '#6e7b8b',
+    },
+  },
+}
+
+export const WithHeight: Story = {
+  args: {
+    track: {
+      ...track,
+      height: 100,
+    },
+  },
+}

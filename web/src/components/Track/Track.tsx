@@ -7,10 +7,14 @@ interface ITrackProps {
 }
 
 const Track = ({ track }: ITrackProps) => {
-  const bgColor = track.color ? { backgroundColor: track.color } : {}
+  const backgroundColor = track.color ? { backgroundColor: track.color } : {}
+  const height = track.height ? { height: track.height } : {}
 
   return (
-    <div style={{ ...bgColor }} className="m-2 flex items-center bg-slate-700">
+    <div
+      style={{ ...backgroundColor, ...height }}
+      className="m-2 flex bg-slate-700"
+    >
       <div className="w-6"></div>
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
