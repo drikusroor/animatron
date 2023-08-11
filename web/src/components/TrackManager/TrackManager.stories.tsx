@@ -52,6 +52,11 @@ export const WithSmallContainer: Story = {
       createTrack({
         id: 1,
         name: 'Track 1',
+        color: '#fff',
+      }),
+      createTrack({
+        id: 1,
+        name: 'Track 1',
         color: '#ff0000',
       }),
       createTrack({
