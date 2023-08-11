@@ -64,6 +64,13 @@ export const WithSmallContainer: Story = {
         name: 'Track 3',
         color: '#0000ff',
       }),
+      ...new Array(100).fill(null).map((_, i) =>
+        createTrack({
+          id: i + 4,
+          name: `Track ${i + 4}`,
+          color: '#000000',
+        })
+      ),
     ],
   },
   parameters: {
@@ -71,7 +78,7 @@ export const WithSmallContainer: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '50%' }}>
+      <div style={{ maxWidth: '640px', height: '240px', overflow: 'auto' }}>
         <Story />
       </div>
     ),
