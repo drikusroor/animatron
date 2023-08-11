@@ -1,6 +1,7 @@
 import { ITrack } from 'src/types/track.interface'
 
 import Clip from '../Clip/Clip'
+import TrackDetails from '../TrackDetails/TrackDetails'
 
 interface ITrackProps {
   track: ITrack
@@ -13,9 +14,10 @@ const Track = ({ track }: ITrackProps) => {
   return (
     <div
       style={{ ...backgroundColor, ...height }}
-      className="m-2 flex bg-slate-700"
+      className="flex bg-slate-700"
     >
-      <div className="w-6"></div>
+      <TrackDetails track={track} />
+      <div className="w-4"></div>
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
           <Clip key={index} clip={clip} />

@@ -5,4 +5,5 @@ export interface ITrack {
   clips: IClip[]
   color?: string
   height?: number
+  name: string
 }

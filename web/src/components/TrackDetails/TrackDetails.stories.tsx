@@ -12,15 +12,15 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import Track from './Track'
+import TrackDetails from './TrackDetails'
 
-const meta: Meta<typeof Track> = {
-  component: Track,
+const meta: Meta<typeof TrackDetails> = {
+  component: TrackDetails,
 }
 
 export default meta
 
-type Story = StoryObj<typeof Track>
+type Story = StoryObj<typeof TrackDetails>
 
 const track = {
   id: 1,
@@ -56,24 +56,6 @@ const track = {
 export const Primary: Story = {
   args: {
     track,
-  },
-}
-
-export const WithColor: Story = {
-  args: {
-    track: {
-      ...track,
-      color: '#6e7b8b',
-    },
-  },
-}
-
-export const WithHeight: Story = {
-  args: {
-    track: {
-      ...track,
-      height: 100,
-    },
   },
 }
 
