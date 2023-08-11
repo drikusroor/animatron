@@ -1,22 +1,23 @@
 import { ITrack } from 'src/types/track.interface'
 
 import Clip from '../Clip/Clip'
-import TrackDetails from '../TrackDetails/TrackDetails'
 
 interface ITrackProps {
   track: ITrack
+  height?: number
 }
 
-const Track = ({ track }: ITrackProps) => {
-  const backgroundColor = track.color ? { backgroundColor: track.color } : {}
-  const height = track.height ? { height: track.height } : {}
+const Track = ({ track, height }: ITrackProps) => {
+  const backgroundColorStyle = track.color
+    ? { backgroundColor: track.color }
+    : {}
+  const heightStyle = height ? { height: `${height}px` } : {}
 
   return (
     <div
-      style={{ ...backgroundColor, ...height }}
-      className="flex gap-3 bg-slate-700"
+      style={{ ...backgroundColorStyle, ...heightStyle }}
+      className="w-fit bg-slate-700 pl-3"
     >
-      <TrackDetails track={track} />
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
           <Clip key={index} clip={clip} />

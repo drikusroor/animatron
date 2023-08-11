@@ -12,6 +12,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { createTrack } from 'src/__mocks__/mockData'
+
 import TrackManager from './TrackManager'
 
 const meta: Meta<typeof TrackManager> = {
@@ -22,4 +24,56 @@ export default meta
 
 type Story = StoryObj<typeof TrackManager>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    tracks: [
+      createTrack({
+        id: 1,
+        name: 'Track 1',
+        color: '#ff0000',
+      }),
+      createTrack({
+        id: 2,
+        name: 'Track 2',
+        color: '#00ff00',
+      }),
+      createTrack({
+        id: 3,
+        name: 'Track 3',
+        color: '#0000ff',
+      }),
+    ],
+  },
+}
+
+export const WithSmallContainer: Story = {
+  args: {
+    tracks: [
+      createTrack({
+        id: 1,
+        name: 'Track 1',
+        color: '#ff0000',
+      }),
+      createTrack({
+        id: 2,
+        name: 'Track 2',
+        color: '#00ff00',
+      }),
+      createTrack({
+        id: 3,
+        name: 'Track 3',
+        color: '#0000ff',
+      }),
+    ],
+  },
+  parameters: {
+    layout: 'fullscreen',
+  },
+  decorators: [
+    (Story) => (
+      <div style={{ width: '50%' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
