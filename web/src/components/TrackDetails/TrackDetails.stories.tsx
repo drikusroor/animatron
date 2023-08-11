@@ -12,6 +12,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { track } from 'src/__mocks__/mockData'
+
 import TrackDetails from './TrackDetails'
 
 const meta: Meta<typeof TrackDetails> = {
@@ -21,37 +23,6 @@ const meta: Meta<typeof TrackDetails> = {
 export default meta
 
 type Story = StoryObj<typeof TrackDetails>
-
-const track = {
-  id: 1,
-  name: 'Track 1',
-  clips: [
-    {
-      id: 1,
-      start: 0,
-      keyframes: [
-        {
-          id: 1,
-          duration: 20,
-        },
-      ],
-    },
-    {
-      id: 1,
-      start: 25,
-      keyframes: [
-        {
-          id: 1,
-          duration: 10,
-        },
-        {
-          id: 1,
-          duration: 10,
-        },
-      ],
-    },
-  ],
-}
 
 export const Primary: Story = {
   args: {

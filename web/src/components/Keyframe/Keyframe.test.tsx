@@ -1,5 +1,7 @@
 import { render } from '@redwoodjs/testing/web'
 
+import { keyframe } from 'src/__mocks__/mockData'
+
 import Keyframe from './Keyframe'
 
 //   Improve this test with help from the Redwood Testing Doc:
@@ -8,11 +10,6 @@ import Keyframe from './Keyframe'
 describe('Keyframe', () => {
   it('renders successfully', () => {
     expect(() => {
-      const keyframe = {
-        id: 1,
-        duration: 10,
-      }
-
       render(<Keyframe keyframe={keyframe} />)
     }).not.toThrow()
   })

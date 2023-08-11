@@ -1,5 +1,7 @@
 import { render } from '@redwoodjs/testing/web'
 
+import { keyframe } from 'src/__mocks__/mockData'
+
 import KeyframeAnchor from './KeyframeAnchor'
 
 //   Improve this test with help from the Redwood Testing Doc:
@@ -8,11 +10,6 @@ import KeyframeAnchor from './KeyframeAnchor'
 describe('KeyframeAnchor', () => {
   it('renders successfully', () => {
     expect(() => {
-      const keyframe = {
-        id: 1,
-        duration: 10,
-      }
-
       render(<KeyframeAnchor keyframe={keyframe} />)
     }).not.toThrow()
   })

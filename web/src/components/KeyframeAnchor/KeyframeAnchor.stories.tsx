@@ -13,10 +13,12 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
+import { keyframe } from 'src/__mocks__/mockData'
+
 import KeyframeAnchor from './KeyframeAnchor'
 
 export const generated = () => {
-  return <KeyframeAnchor />
+  return <KeyframeAnchor keyframe={keyframe} />
 }
 
 export default {
