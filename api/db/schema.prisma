@@ -92,7 +92,6 @@ model AnimationTrackKeyframe {
   sort                 Int
   duration             Int
   css                  String
-  style                String
   AnimationTrackClip   AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
   animationTrackClipId Int?
 }
