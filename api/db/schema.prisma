@@ -68,9 +68,8 @@ model AnimationEntity {
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   image              String
-  css                String
-  style              String
   html               String
+  css                String
   AnimationTrackClip AnimationTrackClip[]
 }
 
