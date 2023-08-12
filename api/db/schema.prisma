@@ -30,17 +30,17 @@ model AnimationHistory {
 }
 
 model Animation {
-  id                        Int                       @id @default(autoincrement())
-  name                      String
-  description               String?
-  uuid                      String                    @unique @default(uuid())
-  animationHistoryId        Int
-  AnimationHistory          AnimationHistory          @relation("revisions", fields: [animationHistoryId], references: [id])
-  version                   Int
-  createdAt                 DateTime                  @default(now())
-  updatedAt                 DateTime                  @updatedAt
-  tracks                    AnimationTrack[]
-  AnimationRevisionEntities AnimationRevisionEntity[]
+  id                 Int               @id @default(autoincrement())
+  name               String
+  description        String?
+  uuid               String            @unique @default(uuid())
+  animationHistoryId Int
+  AnimationHistory   AnimationHistory  @relation("revisions", fields: [animationHistoryId], references: [id])
+  version            Int
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  tracks             AnimationTrack[]
+  AnimationEntities  AnimationEntity[]
 }
 
 model AnimationTrack {
@@ -58,12 +58,30 @@ model AnimationTrack {
   AnimationTrackClips AnimationTrackClip[]
 }
 
+model AnimationEntity {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  description        String?
+  uuid               String               @unique @default(uuid())
+  revisionId         Int
+  revision           Animation            @relation(fields: [revisionId], references: [id])
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  image              String
+  css                String
+  style              String
+  html               String
+  AnimationTrackClip AnimationTrackClip[]
+}
+
 model AnimationTrackClip {
-  id      Int            @id @default(autoincrement())
-  uuid    String         @unique @default(uuid())
-  trackId Int
-  track   AnimationTrack @relation(fields: [trackId], references: [id])
-  start   Int
+  id                Int             @id @default(autoincrement())
+  uuid              String          @unique @default(uuid())
+  trackId           Int
+  track             AnimationTrack  @relation(fields: [trackId], references: [id])
+  start             Int
+  animationEntityId Int
+  AnimationEntity   AnimationEntity @relation(fields: [animationEntityId], references: [id])
 
   AnimationTrackKeyframes AnimationTrackKeyframe[]
 }
@@ -75,22 +93,6 @@ model AnimationTrackKeyframe {
   duration             Int
   css                  String
   style                String
-  html                 String
   AnimationTrackClip   AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
   animationTrackClipId Int?
-}
-
-model AnimationRevisionEntity {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  uuid        String    @unique @default(uuid())
-  revisionId  Int
-  revision    Animation @relation(fields: [revisionId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  image       String
-  css         String
-  style       String
-  html        String
 }
