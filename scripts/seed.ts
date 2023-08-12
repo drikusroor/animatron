@@ -56,6 +56,135 @@ export default async () => {
     //       }
     //     })
     //   }
+
+    const animationHistories = [
+      {
+        id: 1,
+        name: 'Animation 1',
+        description: 'This is animation 1',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+      },
+    ]
+
+    for (const animationHistory of animationHistories) {
+      await db.animationHistory.create({
+        data: animationHistory,
+      })
+    }
+
+    const animations = [
+      {
+        id: 1,
+        name: 'Animation 1',
+        description: 'This is animation 1',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+        animationHistoryId: 1,
+        version: 1,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+      },
+    ]
+
+    for (const animation of animations) {
+      await db.animation.create({
+        data: animation,
+      })
+    }
+
+    const animationTracks = [
+      {
+        id: 1,
+        name: 'Track 1',
+        description: 'This is track 1',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+        revisionId: 1,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+        sortNumber: 1,
+      },
+    ]
+
+    for (const animationTrack of animationTracks) {
+      await db.animationTrack.create({
+        data: animationTrack,
+      })
+    }
+
+    const animationEntities = [
+      {
+        id: 1,
+        name: 'Entity 1',
+        description: 'This is entity 1',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+        revisionId: 1,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+        image: '',
+        html: `
+        <div></div>
+        `,
+        css: `
+        {
+          with: 32px;
+          height: 32px;
+          background: #f00;
+        }
+        `,
+      },
+    ]
+
+    for (const animationEntity of animationEntities) {
+      await db.animationEntity.create({
+        data: animationEntity,
+      })
+    }
+
+    const animationTrackClips = [
+      {
+        id: 1,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+        animationTrackId: 1,
+        start: 0,
+        animationEntityId: 1,
+      },
+    ]
+
+    for (const animationTrackClip of animationTrackClips) {
+      await db.animationTrackClip.create({
+        data: animationTrackClip,
+      })
+    }
+
+    const animationTrackKeyframes = [
+      {
+        id: 1,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
+        sort: 0,
+        duration: 20,
+        css: `
+        {
+          margin-left: 0px;
+        }
+        `,
+      },
+      {
+        id: 2,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130004',
+        sort: 1,
+        duration: 0,
+        css: `
+        {
+          margin-left: 32px;
+        }
+        `,
+      },
+    ]
+
+    for (const animationTrackKeyframe of animationTrackKeyframes) {
+      await db.animationTrackKeyframe.create({
+        data: animationTrackKeyframe,
+      })
+    }
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)
