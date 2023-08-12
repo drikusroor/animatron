@@ -24,20 +24,23 @@ model AnimationHistory {
   uuid              String      @unique
   revisions         Animation[] @relation("revisions")
   currentRevisionId Int?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  forkedFromId      Int?
 }
 
 model Animation {
-  id                        Int                       @id @default(autoincrement())
-  name                      String
-  description               String?
-  uuid                      String                    @unique @default(uuid())
-  animationId               Int
-  animation                 AnimationHistory          @relation("revisions", fields: [animationId], references: [id])
-  version                   Int
-  createdAt                 DateTime                  @default(now())
-  updatedAt                 DateTime                  @updatedAt
-  layers                    AnimationTrack[]
-  AnimationRevisionEntities AnimationRevisionEntity[]
+  id                 Int               @id @default(autoincrement())
+  name               String
+  description        String?
+  uuid               String            @unique @default(uuid())
+  animationHistoryId Int
+  AnimationHistory   AnimationHistory  @relation("revisions", fields: [animationHistoryId], references: [id])
+  version            Int
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  tracks             AnimationTrack[]
+  AnimationEntities  AnimationEntity[]
 }
 
 model AnimationTrack {
@@ -47,26 +50,37 @@ model AnimationTrack {
   uuid        String    @unique @default(uuid())
   revisionId  Int
   revision    Animation @relation(fields: [revisionId], references: [id])
-  version     Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   sortNumber  Int
-  color       String
-  height      Int
-  image       String
-  css         String
-  style       String
-  html        String
+  color       String?
 
   AnimationTrackClips AnimationTrackClip[]
 }
 
+model AnimationEntity {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  description        String?
+  uuid               String               @unique @default(uuid())
+  revisionId         Int
+  revision           Animation            @relation(fields: [revisionId], references: [id])
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  image              String
+  html               String
+  css                String
+  AnimationTrackClip AnimationTrackClip[]
+}
+
 model AnimationTrackClip {
-  id      Int            @id @default(autoincrement())
-  uuid    String         @unique @default(uuid())
-  layerId Int
-  layer   AnimationTrack @relation(fields: [layerId], references: [id])
-  start   Int
+  id                Int             @id @default(autoincrement())
+  uuid              String          @unique @default(uuid())
+  start             Int
+  animationTrackId  Int
+  AnimationTrack    AnimationTrack  @relation(fields: [animationTrackId], references: [id])
+  animationEntityId Int
+  AnimationEntity   AnimationEntity @relation(fields: [animationEntityId], references: [id])
 
   AnimationTrackKeyframes AnimationTrackKeyframe[]
 }
@@ -77,23 +91,6 @@ model AnimationTrackKeyframe {
   sort                 Int
   duration             Int
   css                  String
-  style                String
-  html                 String
   AnimationTrackClip   AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
   animationTrackClipId Int?
-}
-
-model AnimationRevisionEntity {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  uuid        String    @unique @default(uuid())
-  revisionId  Int
-  revision    Animation @relation(fields: [revisionId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  image       String
-  css         String
-  style       String
-  html        String
 }
