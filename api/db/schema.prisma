@@ -17,52 +17,83 @@ model UserExample {
   name  String?
 }
 
-model Animation {
-  id                Int                 @id @default(autoincrement())
+model AnimationHistory {
+  id                Int         @id @default(autoincrement())
   name              String
   description       String?
-  uuid              String              @unique
-  revisions         AnimationRevision[] @relation("revisions")
+  uuid              String      @unique
+  revisions         Animation[] @relation("revisions")
   currentRevisionId Int?
 }
 
-model AnimationRevision {
-  id          Int                      @id @default(autoincrement())
-  name        String
-  description String?
-  uuid        String                   @unique @default(uuid())
-  animationId Int
-  animation   Animation                @relation("revisions", fields: [animationId], references: [id])
-  version     Int
-  createdAt   DateTime                 @default(now())
-  updatedAt   DateTime                 @updatedAt
-  layers      AnimationRevisionLayer[]
+model Animation {
+  id                        Int                       @id @default(autoincrement())
+  name                      String
+  description               String?
+  uuid                      String                    @unique @default(uuid())
+  animationId               Int
+  animation                 AnimationHistory          @relation("revisions", fields: [animationId], references: [id])
+  version                   Int
+  createdAt                 DateTime                  @default(now())
+  updatedAt                 DateTime                  @updatedAt
+  layers                    AnimationTrack[]
+  AnimationRevisionEntities AnimationRevisionEntity[]
 }
 
-model AnimationRevisionLayer {
-  id          Int                           @id @default(autoincrement())
+model AnimationTrack {
+  id          Int       @id @default(autoincrement())
   name        String
   description String?
-  uuid        String                        @unique @default(uuid())
+  uuid        String    @unique @default(uuid())
   revisionId  Int
-  revision    AnimationRevision             @relation(fields: [revisionId], references: [id])
+  revision    Animation @relation(fields: [revisionId], references: [id])
   version     Int
-  createdAt   DateTime                      @default(now())
-  updatedAt   DateTime                      @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   sortNumber  Int
+  color       String
+  height      Int
   image       String
   css         String
   style       String
   html        String
-  frames      AnimationRevisionLayerFrame[]
+
+  AnimationTrackClips AnimationTrackClip[]
 }
 
-model AnimationRevisionLayerFrame {
-  id      Int                    @id @default(autoincrement())
-  uuid    String                 @unique @default(uuid())
+model AnimationTrackClip {
+  id      Int            @id @default(autoincrement())
+  uuid    String         @unique @default(uuid())
   layerId Int
-  layer   AnimationRevisionLayer @relation(fields: [layerId], references: [id])
-  css     String
-  style   String
-  html    String
+  layer   AnimationTrack @relation(fields: [layerId], references: [id])
+  start   Int
+
+  AnimationTrackKeyframes AnimationTrackKeyframe[]
+}
+
+model AnimationTrackKeyframe {
+  id                   Int                 @id @default(autoincrement())
+  uuid                 String              @unique @default(uuid())
+  sort                 Int
+  duration             Int
+  css                  String
+  style                String
+  html                 String
+  AnimationTrackClip   AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
+  animationTrackClipId Int?
+}
+
+model AnimationRevisionEntity {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  uuid        String    @unique @default(uuid())
+  revisionId  Int
+  revision    Animation @relation(fields: [revisionId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  image       String
+  css         String
+  style       String
+  html        String
 }
