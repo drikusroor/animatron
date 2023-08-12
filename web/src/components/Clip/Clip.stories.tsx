@@ -13,30 +13,9 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
-import Clip from './Clip'
+import { clip } from 'src/__mocks__/mockData'
 
-const clip = {
-  id: 0,
-  start: 5,
-  keyframes: [
-    {
-      id: 1,
-      duration: 5,
-    },
-    {
-      id: 2,
-      duration: 11,
-    },
-    {
-      id: 3,
-      duration: 3,
-    },
-    {
-      id: -1,
-      duration: 0,
-    },
-  ],
-}
+import Clip from './Clip'
 
 export const generated = () => {
   return <Clip clip={clip} />

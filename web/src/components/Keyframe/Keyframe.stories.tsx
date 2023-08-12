@@ -11,18 +11,12 @@
 //
 // See https://storybook.js.org/docs/react/writing-stories/args.
 
-import type { ComponentMeta } from '@storybook/react'
-
+import { keyframe } from 'src/__mocks__/mockData'
 import { IKeyframe } from 'src/types/keyframe.interface'
 
 import Keyframe from './Keyframe'
 
 export const generated = () => {
-  const keyframe: IKeyframe = {
-    id: 1,
-    duration: 5,
-  }
-
   return <Keyframe keyframe={keyframe} />
 }
 
@@ -42,4 +36,4 @@ export const onGrayBackground = () => {
 export default {
   title: 'Components/Keyframe',
   component: Keyframe,
-} as ComponentMeta<typeof Keyframe>
+}
