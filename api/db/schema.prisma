@@ -76,9 +76,9 @@ model AnimationEntity {
 model AnimationTrackClip {
   id                Int             @id @default(autoincrement())
   uuid              String          @unique @default(uuid())
-  trackId           Int
-  track             AnimationTrack  @relation(fields: [trackId], references: [id])
   start             Int
+  animationTrackId  Int
+  AnimationTrack    AnimationTrack  @relation(fields: [animationTrackId], references: [id])
   animationEntityId Int
   AnimationEntity   AnimationEntity @relation(fields: [animationEntityId], references: [id])
 
