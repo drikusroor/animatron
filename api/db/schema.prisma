@@ -51,6 +51,8 @@ model AnimationTrack {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   sortNumber  Int
+  color       String
+  height      Int
   image       String
   css         String
   style       String
@@ -72,7 +74,7 @@ model AnimationTrackClip {
 model AnimationTrackKeyframe {
   id                   Int                 @id @default(autoincrement())
   uuid                 String              @unique @default(uuid())
-  start                Int
+  sort                 Int
   duration             Int
   css                  String
   style                String
