@@ -61,8 +61,8 @@ model AnimationTrack {
 model AnimationTrackClip {
   id      Int            @id @default(autoincrement())
   uuid    String         @unique @default(uuid())
-  layerId Int
-  layer   AnimationTrack @relation(fields: [layerId], references: [id])
+  trackId Int
+  track   AnimationTrack @relation(fields: [trackId], references: [id])
   start   Int
 
   AnimationTrackKeyframes AnimationTrackKeyframe[]
