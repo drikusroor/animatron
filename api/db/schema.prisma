@@ -50,7 +50,6 @@ model AnimationTrack {
   uuid        String    @unique @default(uuid())
   revisionId  Int
   revision    Animation @relation(fields: [revisionId], references: [id])
-  version     Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   sortNumber  Int
