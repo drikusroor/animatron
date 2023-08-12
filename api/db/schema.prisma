@@ -40,7 +40,7 @@ model Animation {
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
   tracks             AnimationTrack[]
-  AnimationEntities  AnimationEntity[]
+  entities           AnimationEntity[]
 }
 
 model AnimationTrack {
@@ -55,22 +55,22 @@ model AnimationTrack {
   sortNumber  Int
   color       String?
 
-  AnimationTrackClips AnimationTrackClip[]
+  clips AnimationTrackClip[]
 }
 
 model AnimationEntity {
-  id                 Int                  @id @default(autoincrement())
-  name               String
-  description        String?
-  uuid               String               @unique @default(uuid())
-  revisionId         Int
-  revision           Animation            @relation(fields: [revisionId], references: [id])
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  image              String
-  html               String
-  css                String
-  AnimationTrackClip AnimationTrackClip[]
+  id          Int                  @id @default(autoincrement())
+  name        String
+  description String?
+  uuid        String               @unique @default(uuid())
+  revisionId  Int
+  revision    Animation            @relation(fields: [revisionId], references: [id])
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  image       String
+  html        String
+  css         String
+  clip        AnimationTrackClip[]
 }
 
 model AnimationTrackClip {
@@ -78,11 +78,11 @@ model AnimationTrackClip {
   uuid              String          @unique @default(uuid())
   start             Int
   animationTrackId  Int
-  AnimationTrack    AnimationTrack  @relation(fields: [animationTrackId], references: [id])
+  track             AnimationTrack  @relation(fields: [animationTrackId], references: [id])
   animationEntityId Int
-  AnimationEntity   AnimationEntity @relation(fields: [animationEntityId], references: [id])
+  entity            AnimationEntity @relation(fields: [animationEntityId], references: [id])
 
-  AnimationTrackKeyframes AnimationTrackKeyframe[]
+  keyframes AnimationTrackKeyframe[]
 }
 
 model AnimationTrackKeyframe {
@@ -91,6 +91,6 @@ model AnimationTrackKeyframe {
   sort                 Int
   duration             Int
   css                  String
-  AnimationTrackClip   AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
   animationTrackClipId Int?
+  clip                 AnimationTrackClip? @relation(fields: [animationTrackClipId], references: [id])
 }
