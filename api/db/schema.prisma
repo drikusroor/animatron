@@ -39,7 +39,7 @@ model Animation {
   version                   Int
   createdAt                 DateTime                  @default(now())
   updatedAt                 DateTime                  @updatedAt
-  layers                    AnimationTrack[]
+  tracks                    AnimationTrack[]
   AnimationRevisionEntities AnimationRevisionEntity[]
 }
 
