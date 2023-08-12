@@ -34,8 +34,8 @@ model Animation {
   name                      String
   description               String?
   uuid                      String                    @unique @default(uuid())
-  animationId               Int
-  animation                 AnimationHistory          @relation("revisions", fields: [animationId], references: [id])
+  animationHistoryId        Int
+  AnimationHistory          AnimationHistory          @relation("revisions", fields: [animationHistoryId], references: [id])
   version                   Int
   createdAt                 DateTime                  @default(now())
   updatedAt                 DateTime                  @updatedAt
