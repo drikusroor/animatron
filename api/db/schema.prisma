@@ -53,12 +53,7 @@ model AnimationTrack {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   sortNumber  Int
-  color       String
-  height      Int
-  image       String
-  css         String
-  style       String
-  html        String
+  color       String?
 
   AnimationTrackClips AnimationTrackClip[]
 }
