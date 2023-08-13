@@ -102,6 +102,16 @@ export default async () => {
         updatedAt: '2021-04-10T00:00:00.000Z',
         sortNumber: 1,
       },
+      {
+        id: 2,
+        name: 'Track 2',
+        description: 'This is track 2',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130004',
+        revisionId: 1,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+        sortNumber: 2,
+      },
     ]
 
     for (const animationTrack of animationTracks) {
@@ -131,6 +141,26 @@ export default async () => {
         }
         `,
       },
+      {
+        id: 2,
+        name: 'Entity 2',
+        description: 'This is entity 2',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130303',
+        revisionId: 1,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+        image: '',
+        html: `
+        <div></div>
+        `,
+        css: `
+        {
+          with: 32px;
+          height: 32px;
+          background: #f00;
+        }
+        `,
+      },
     ]
 
     for (const animationEntity of animationEntities) {
@@ -145,6 +175,20 @@ export default async () => {
         uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
         animationTrackId: 1,
         start: 0,
+        animationEntityId: 1,
+      },
+      {
+        id: 2,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130004',
+        animationTrackId: 1,
+        start: 20,
+        animationEntityId: 2,
+      },
+      {
+        id: 3,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130005',
+        animationTrackId: 2,
+        start: 10,
         animationEntityId: 1,
       },
     ]
@@ -177,6 +221,31 @@ export default async () => {
         css: `
         {
           margin-left: 32px;
+        }
+        `,
+      },
+      {
+        id: 3,
+        animationTrackClipId: 2,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130005',
+        sort: 0,
+        duration: 10,
+        css: `
+        {
+          margin-left: 0px;
+        }
+        `,
+      },
+      {
+        id: 4,
+
+        animationTrackClipId: 3,
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130006',
+        sort: 0,
+        duration: 10,
+        css: `
+        {
+          margin-left: 0px;
         }
         `,
       },
