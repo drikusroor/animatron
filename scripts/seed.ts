@@ -158,6 +158,7 @@ export default async () => {
     const animationTrackKeyframes = [
       {
         id: 1,
+        animationTrackClipId: 1,
         uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
         sort: 0,
         duration: 20,
@@ -169,6 +170,7 @@ export default async () => {
       },
       {
         id: 2,
+        animationTrackClipId: 1,
         uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130004',
         sort: 1,
         duration: 0,
