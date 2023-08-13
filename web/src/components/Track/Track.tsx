@@ -16,7 +16,7 @@ const Track = ({ track, height }: ITrackProps) => {
   return (
     <div
       style={{ ...backgroundColorStyle, ...heightStyle }}
-      className="w-fit bg-slate-800 pl-3"
+      className="w-full bg-slate-800 pl-3"
     >
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (

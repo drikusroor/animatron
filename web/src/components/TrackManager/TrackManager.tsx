@@ -41,7 +41,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           <TrackDetails key={track.id} track={track} height={trackHeight} />
         ))}
       </div>
-      <div className="overflow-x-auto" ref={scrollRef}>
+      <div className="w-full overflow-x-auto" ref={scrollRef}>
         {tracks.map((track) => (
           <Track key={track.id} track={track} height={trackHeight} />
         ))}
