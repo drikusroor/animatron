@@ -4,7 +4,7 @@ import { devtools } from 'zustand/middleware'
 type TSelectionType = 'entity' | 'track' | 'clip' | 'keyframe'
 
 export interface ISelection {
-  id: number
+  index: number
   type: TSelectionType
 }
 
