@@ -3,7 +3,7 @@ type AppLayoutProps = {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-  return <div className="min-h-screen bg-slate-800 text-white">{children}</div>
+  return <div className="min-h-screen bg-slate-900 text-white">{children}</div>
 }
 
 export default AppLayout

@@ -5,12 +5,17 @@ import type {
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import AnimationEditor from '../AnimationEditor/AnimationEditor'
+
+import { mapAnimationQueryData } from './helpers/map'
+
 export const QUERY = gql`
   query FindAnimationQuery($id: Int!) {
     animation: animation(id: $id) {
       id
       name
       description
+      animationHistoryId
       version
       createdAt
       updatedAt
@@ -65,8 +70,16 @@ export const Failure = ({
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
 )
 
-export const Success = ({
-  animation,
-}: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>) => {
-  return <pre>{JSON.stringify(animation, null, 2)}</pre>
+export const Success = (
+  queryData: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>
+) => {
+  const { animation, entities, tracks } = mapAnimationQueryData(queryData)
+
+  return (
+    <AnimationEditor
+      animation={animation}
+      entities={entities}
+      tracks={tracks}
+    />
+  )
 }

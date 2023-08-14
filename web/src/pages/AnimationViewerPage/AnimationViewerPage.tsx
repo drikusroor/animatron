@@ -14,16 +14,6 @@ const AnimationViewerPage = (props: AnimationViewerPageProps) => {
     <>
       <MetaTags title="AnimationViewer" description="AnimationViewer page" />
 
-      <h1>AnimationViewerPage for id: {props.id}</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/AnimationViewerPage/AnimationViewerPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>animationViewer</code>, link to me with
-        `<Link to={routes.animationViewer({ id: '1' })}>AnimationViewer</Link>`
-      </p>
-
       <AnimationCell id={id} />
     </>
   )
