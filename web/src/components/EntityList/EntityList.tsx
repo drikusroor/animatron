@@ -20,6 +20,7 @@ const EntityList = (props: IEntityListProps) => {
         return (
           <li key={index}>
             <button
+              data-testid="entity-list-item-button"
               className={`mt-2 block w-full cursor-pointer rounded-lg px-2 py-2 text-left transition-colors hover:bg-gray-700
                 ${isSelected(entity.id) ? 'bg-gray-700 font-bold' : ''}`}
               onClick={() => select({ type: 'entity', id: entity.id })}
@@ -28,6 +29,10 @@ const EntityList = (props: IEntityListProps) => {
                   select({ type: 'entity', id: entity.id })
                 }
               }}
+              role="option"
+              aria-selected={isSelected(entity.id)}
+              aria-label={`Select ${entity.name} from list`}
+              tabIndex={0}
             >
               {entity.name}
             </button>
