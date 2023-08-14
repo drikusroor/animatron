@@ -1,3 +1,4 @@
+import { IAnimation } from 'src/types/animation.interface'
 import { IClip } from 'src/types/clip.interface'
 import { IEntity } from 'src/types/entity.interface'
 import { IKeyframe } from 'src/types/keyframe.interface'
@@ -57,6 +58,23 @@ export const entity: IEntity = {
 export function createEntity(overrides?: Partial<IEntity>): IEntity {
   return {
     ...entity,
+    ...overrides,
+  }
+}
+
+export const animation: IAnimation = {
+  id: 1,
+  name: 'Animation 1',
+  description: 'Animation 1 description',
+  animationHistoryId: 1,
+  version: 1,
+  createdAt: '2020-01-01T00:00:00.000Z',
+  updatedAt: '2020-01-01T00:00:00.000Z',
+}
+
+export function createAnimation(overrides?: Partial<IAnimation>): IAnimation {
+  return {
+    ...animation,
     ...overrides,
   }
 }
