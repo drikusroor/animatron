@@ -1,11 +1,9 @@
-import { IAnimation } from 'src/types/animation.interface'
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
 import TrackManager from '../TrackManager/TrackManager'
 
 interface AnimationEditorProps {
-  animation: IAnimation
   entities: IEntity[]
   tracks: ITrack[]
 }
@@ -18,11 +16,11 @@ const AnimationEditor = (props: AnimationEditorProps) => {
       <div className="flex h-screen w-64 flex-col border-e p-2">
         <h2 className="text-sm font-bold uppercase">Entities</h2>
         <ul className="mt-3">
-          {entities.map((entity: IEntity) => {
+          {entities.map((entity: IEntity, index) => {
             return (
               <li
                 className="cursor-pointer rounded-lg px-2 py-2 transition-colors hover:bg-gray-700"
-                key={entity.id}
+                key={index}
               >
                 {entity.name}
               </li>

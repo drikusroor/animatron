@@ -37,13 +37,13 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           className={`absolute -right-4 top-0 z-10 h-full w-4 bg-gradient-to-r from-slate-900 transition-opacity
           ${showShadow ? 'opacity-25' : 'opacity-0'}`}
         />
-        {tracks.map((track) => (
-          <TrackDetails key={track.id} track={track} height={trackHeight} />
+        {tracks.map((track, index) => (
+          <TrackDetails key={index} track={track} height={trackHeight} />
         ))}
       </div>
       <div className="w-full overflow-x-auto" ref={scrollRef}>
-        {tracks.map((track) => (
-          <Track key={track.id} track={track} height={trackHeight} />
+        {tracks.map((track, index) => (
+          <Track key={index} track={track} height={trackHeight} />
         ))}
       </div>
     </div>
