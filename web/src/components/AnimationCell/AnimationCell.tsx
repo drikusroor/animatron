@@ -73,13 +73,7 @@ export const Failure = ({
 export const Success = (
   queryData: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>
 ) => {
-  const { animation, entities, tracks } = mapAnimationQueryData(queryData)
+  const { entities, tracks } = mapAnimationQueryData(queryData)
 
-  return (
-    <AnimationEditor
-      animation={animation}
-      entities={entities}
-      tracks={tracks}
-    />
-  )
+  return <AnimationEditor entities={entities} tracks={tracks} />
 }
