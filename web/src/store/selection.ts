@@ -3,7 +3,7 @@ import { devtools } from 'zustand/middleware'
 
 type TSelectionType = 'entity' | 'track' | 'clip' | 'keyframe'
 
-interface ISelection {
+export interface ISelection {
   id: number
   type: TSelectionType
 }
