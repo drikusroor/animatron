@@ -135,7 +135,7 @@ export default async () => {
         `,
         css: `
         {
-          with: 32px;
+          width: 32px;
           height: 32px;
           background: #f00;
         }
@@ -155,8 +155,8 @@ export default async () => {
         `,
         css: `
         {
-          with: 32px;
-          height: 32px;
+          width: 64px;
+          height: 64px;
           background: #f00;
         }
         `,
