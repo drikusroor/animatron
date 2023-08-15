@@ -50,6 +50,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Entity Editor</h1>
         <button
+          data-testid="entity-editor-close-button"
           className="flex items-center justify-center rounded-lg bg-red-500 p-2"
           onClick={fadeAndDeselect}
         >
