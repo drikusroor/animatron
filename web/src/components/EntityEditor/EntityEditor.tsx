@@ -1,10 +1,15 @@
+import { useState } from 'react'
+
 import { IEntity } from 'src/types/entity.interface'
 
 interface IEntityEditorProps {
   entity: IEntity
+  deselectEntity: () => void
 }
 
-const EntityEditor = ({ entity }: IEntityEditorProps) => {
+const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
+  const [fade, setFade] = useState(false)
+
   function parseStyle(cssString: string) {
     // Remove the curly braces and trim the string
     const cleanedString = cssString.replace(/[\{\}]/g, '').trim()
@@ -29,10 +34,28 @@ const EntityEditor = ({ entity }: IEntityEditorProps) => {
     return styleObject
   }
 
+  const fadeAndDeselect = () => {
+    setFade(true)
+    setTimeout(() => {
+      deselectEntity()
+    }, 300)
+  }
+
   return (
-    <div className="h-full p-4">
-      <h1 className="text-2xl font-bold">Entity Editor</h1>
-      <p className="mt-4 text-xl font-bold">{entity.name}</p>
+    <div
+      className={`h-full p-4 transition-opacity duration-300 ease-in-out ${
+        fade ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Entity Editor</h1>
+        <button
+          className="flex items-center justify-center rounded-lg bg-red-500 p-2"
+          onClick={fadeAndDeselect}
+        >
+          {/* <FaTimes /> */}Close X
+        </button>
+      </div>
 
       <form className="mt-4 flex flex-row gap-4">
         <div className="flex flex-col">
