@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { FaTimes } from 'react-icons/fa'
+
 import { IEntity } from 'src/types/entity.interface'
 
 interface IEntityEditorProps {
@@ -51,10 +53,10 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
         <h1 className="text-2xl font-bold">Entity Editor</h1>
         <button
           data-testid="entity-editor-close-button"
-          className="flex items-center justify-center rounded-lg bg-red-500 p-2"
+          className="flex items-center justify-center rounded-lg bg-red-500 p-2 transition-colors duration-300 ease-in-out hover:bg-red-600"
           onClick={fadeAndDeselect}
         >
-          {/* <FaTimes /> */}Close X
+          <FaTimes />
         </button>
       </div>
 
