@@ -36,7 +36,7 @@ describe('EntityList', () => {
   })
 
   it('renders a list of entities with the selected entity highlighted', () => {
-    const selected: ISelection = { id: 42, type: 'entity' }
+    const selected: ISelection = { index: 0, type: 'entity' }
     const entities = [createEntity({ id: 42 }), createEntity({ id: 43 })]
 
     const { getAllByTestId } = render(
@@ -60,6 +60,6 @@ describe('EntityList', () => {
 
     getAllByTestId('entity-list-item-button')[0].click()
 
-    expect(selectSpy).toHaveBeenCalledWith({ id: 42, type: 'entity' })
+    expect(selectSpy).toHaveBeenCalledWith({ index: 0, type: 'entity' })
   })
 })
