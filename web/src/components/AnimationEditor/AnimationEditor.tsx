@@ -1,6 +1,7 @@
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
+import EntityEditorContainer from '../EntityEditorContainer/EntityEditorContainer'
 import EntityListContainer from '../EntityListContainer/EntityListContainer'
 import TrackManager from '../TrackManager/TrackManager'
 
@@ -19,6 +20,7 @@ const AnimationEditor = (props: AnimationEditorProps) => {
         <EntityListContainer />
       </div>
       <div className="flex h-screen w-full flex-col justify-end border-e">
+        <EntityEditorContainer />
         <TrackManager tracks={tracks} />
       </div>
     </div>
