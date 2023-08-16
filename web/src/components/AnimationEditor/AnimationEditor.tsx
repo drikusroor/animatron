@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+
+import useSelectionStore from 'src/store/selection'
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
@@ -11,7 +14,27 @@ interface AnimationEditorProps {
 }
 
 const AnimationEditor = (props: AnimationEditorProps) => {
+  const selection = useSelectionStore((state) => state.selection)
+  const select = useSelectionStore((state) => state.select)
+
   const { tracks } = props
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selection) {
+        select(null)
+
+        const activeElement = document.activeElement as HTMLElement
+        activeElement.blur()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selection, select])
 
   return (
     <div className="flex h-screen flex-row">
