@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+import useSelectionStore from 'src/store/selection'
 import { ITrack } from 'src/types/track.interface'
 
 import Track from '../Track/Track'
@@ -14,8 +15,10 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const [showShadow, setShowShadow] = useState(false)
 
+  const select = useSelectionStore((state) => state.select)
+  const selection = useSelectionStore((state) => state.selection)
+
   const handleScroll = (e: Event) => {
-    console.log(e)
     const scrollPosition = (e.currentTarget as HTMLDivElement).scrollLeft
     setShowShadow(scrollPosition > 0)
   }
@@ -38,7 +41,14 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           ${showShadow ? 'opacity-25' : 'opacity-0'}`}
         />
         {tracks.map((track, index) => (
-          <TrackDetails key={index} track={track} height={trackHeight} />
+          <TrackDetails
+            key={index}
+            track={track}
+            height={trackHeight}
+            path={[index]}
+            select={select}
+            selection={selection}
+          />
         ))}
       </div>
       <div className="w-full overflow-x-auto" ref={scrollRef}>
