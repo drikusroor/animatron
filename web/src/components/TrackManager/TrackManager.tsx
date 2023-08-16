@@ -53,7 +53,14 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
       </div>
       <div className="w-full overflow-x-auto" ref={scrollRef}>
         {tracks.map((track, index) => (
-          <Track key={index} track={track} height={trackHeight} />
+          <Track
+            key={index}
+            track={track}
+            height={trackHeight}
+            path={[index]}
+            select={select}
+            selection={selection}
+          />
         ))}
       </div>
     </div>

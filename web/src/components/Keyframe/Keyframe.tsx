@@ -1,9 +1,14 @@
+import { ISelection } from 'src/store/selection'
+
 import { IKeyframe } from '../../types/keyframe.interface'
 import KeyframeAnchor from '../KeyframeAnchor/KeyframeAnchor'
 import KeyframeSpan from '../KeyframeSpan/KeyframeSpan'
 
 interface KeyframeProps {
   keyframe: IKeyframe
+  path: number[]
+  select: (selection: ISelection) => void
+  selection: ISelection
 }
 
 const Keyframe = ({ keyframe }: KeyframeProps) => {

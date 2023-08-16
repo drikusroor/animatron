@@ -1,3 +1,4 @@
+import { ISelection } from 'src/store/selection'
 import { ITrack } from 'src/types/track.interface'
 
 import Clip from '../Clip/Clip'
@@ -5,9 +6,12 @@ import Clip from '../Clip/Clip'
 interface ITrackProps {
   track: ITrack
   height?: number
+  path: number[]
+  select: (selection: ISelection) => void
+  selection: ISelection
 }
 
-const Track = ({ track, height }: ITrackProps) => {
+const Track = ({ track, height, path, select, selection }: ITrackProps) => {
   const backgroundColorStyle = track.color
     ? { backgroundColor: track.color }
     : {}
@@ -20,7 +24,13 @@ const Track = ({ track, height }: ITrackProps) => {
     >
       <div className="flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
-          <Clip key={index} clip={clip} />
+          <Clip
+            key={index}
+            clip={clip}
+            path={[...path, index]}
+            select={select}
+            selection={selection}
+          />
         ))}
       </div>
     </div>
