@@ -10,6 +10,7 @@ const EntityEditorContainer = () => {
   const deselectEntity = () => select(null)
 
   const entities = useEntitiesStore((state) => state.entities)
+  const updateEntity = useEntitiesStore((state) => state.updateEntity)
 
   if (currentSelection?.type !== 'entity') return null
 
@@ -20,7 +21,11 @@ const EntityEditorContainer = () => {
   if (!selectedEntity) return null
 
   return (
-    <EntityEditor entity={selectedEntity} deselectEntity={deselectEntity} />
+    <EntityEditor
+      entity={selectedEntity}
+      deselectEntity={deselectEntity}
+      updateEntity={(entity) => updateEntity(entity, currentSelection.path[0])}
+    />
   )
 }
 
