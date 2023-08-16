@@ -11,6 +11,7 @@ export interface ISelection {
 interface ISelectionState {
   selection: ISelection | null
   select: (newSelection: ISelection | null) => void
+  isSelected(path: number[], type: TSelectionType): boolean
 }
 
 const useSelectionStore = create<ISelectionState>()(
@@ -18,6 +19,13 @@ const useSelectionStore = create<ISelectionState>()(
     (set) => ({
       selection: null,
       select: (selection: ISelection) => set({ selection }),
+      isSelected: (path: number[], type: TSelectionType) =>
+        !!(
+          useSelectionStore.getState().selection &&
+          useSelectionStore.getState().selection.type === type &&
+          useSelectionStore.getState().selection.path.join('-') ===
+            path.join('-')
+        ),
     }),
     {
       name: 'selection-storage',
