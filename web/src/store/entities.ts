@@ -7,7 +7,7 @@ interface IEntitiesState {
   entities: IEntity[]
   addEntity: (entity: IEntity) => void
   removeEntity: (entity: IEntity) => void
-  updateEntity: (entity: IEntity) => void
+  updateEntity: (entity: IEntity, index: number) => void
   setEntities: (entities: IEntity[]) => void
 }
 
@@ -28,14 +28,11 @@ const useEntitiesStore = create<IEntitiesState>()(
           state.entities.splice(indexOf, 1)
           return state
         }),
-      updateEntity: (entity: IEntity) =>
+      updateEntity: (entity: IEntity, index: number) =>
         set((state) => {
-          const indexOf = state.entities.indexOf(entity)
-
-          if (indexOf === -1) return state
-
-          state.entities[indexOf] = entity
-          return state
+          const entities = [...state.entities]
+          entities[index] = entity
+          return { ...state, entities }
         }),
       setEntities: (entities: IEntity[]) =>
         set(() => ({

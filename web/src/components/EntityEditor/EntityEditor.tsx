@@ -8,10 +8,15 @@ import EntityRenderer from '../EntityRenderer/EntityRenderer'
 
 interface IEntityEditorProps {
   entity: IEntity
+  updateEntity: (entity: IEntity) => void
   deselectEntity: () => void
 }
 
-const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
+const EntityEditor = ({
+  deselectEntity,
+  entity,
+  updateEntity,
+}: IEntityEditorProps) => {
   const [fade, setFade] = useState(false)
 
   const fadeAndDeselect = () => {
@@ -48,6 +53,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
             rows={10}
             cols={50}
             defaultValue={entity.html}
+            onChange={(e) => updateEntity({ ...entity, html: e.target.value })}
           />
         </div>
 
@@ -60,6 +66,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
             rows={10}
             cols={50}
             defaultValue={entity.css}
+            onChange={(e) => updateEntity({ ...entity, css: e.target.value })}
           />
         </div>
       </form>
