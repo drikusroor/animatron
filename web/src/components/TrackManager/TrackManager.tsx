@@ -31,7 +31,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
   }, [])
 
   return (
-    <div className="flex flex-row overflow-y-auto">
+    <div className="flex flex-row">
       <div className="relative">
         <div
           className={`absolute -right-4 top-0 z-10 h-full w-4 bg-gradient-to-r from-slate-900 transition-opacity
