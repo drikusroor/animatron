@@ -14,7 +14,7 @@ const EntityEditorContainer = () => {
   if (currentSelection?.type !== 'entity') return null
 
   const selectedEntity = entities.find(
-    (entity, index) => currentSelection.index === index
+    (entity, index) => currentSelection?.path[0] === index
   )
 
   if (!selectedEntity) return null

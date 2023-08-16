@@ -4,7 +4,7 @@ import { devtools } from 'zustand/middleware'
 type TSelectionType = 'entity' | 'track' | 'clip' | 'keyframe'
 
 export interface ISelection {
-  index: number
+  path: number[]
   type: TSelectionType
 }
 
@@ -17,7 +17,7 @@ const useSelectionStore = create<ISelectionState>()(
   devtools(
     (set) => ({
       selection: null,
-      select: (newSelection: ISelection) => set({ selection: newSelection }),
+      select: (selection: ISelection) => set({ selection }),
     }),
     {
       name: 'selection-storage',
