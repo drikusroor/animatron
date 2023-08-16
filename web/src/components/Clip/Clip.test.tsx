@@ -9,8 +9,14 @@ import Clip from './Clip'
 
 describe('Clip', () => {
   it('renders successfully', () => {
+    const path = [0, 0]
+    const select = jest.fn()
+    const selection = null
+
     expect(() => {
-      render(<Clip clip={clip} />)
+      render(
+        <Clip clip={clip} path={path} select={select} selection={selection} />
+      )
     }).not.toThrow()
   })
 })

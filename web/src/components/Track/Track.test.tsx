@@ -9,8 +9,19 @@ import Track from './Track'
 
 describe('Track', () => {
   it('renders successfully', () => {
+    const path = [0]
+    const select = jest.fn()
+    const selection = null
+
     expect(() => {
-      render(<Track track={track} />)
+      render(
+        <Track
+          track={track}
+          path={path}
+          select={select}
+          selection={selection}
+        />
+      )
     }).not.toThrow()
   })
 })
