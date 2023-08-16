@@ -4,6 +4,8 @@ import { FaTimes } from 'react-icons/fa'
 
 import { IEntity } from 'src/types/entity.interface'
 
+import EntityRenderer from '../EntityRenderer/EntityRenderer'
+
 interface IEntityEditorProps {
   entity: IEntity
   deselectEntity: () => void
@@ -11,30 +13,6 @@ interface IEntityEditorProps {
 
 const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
   const [fade, setFade] = useState(false)
-
-  function parseStyle(cssString: string) {
-    // Remove the curly braces and trim the string
-    const cleanedString = cssString.replace(/[\{\}]/g, '').trim()
-
-    // Split the cleaned string by semicolons
-    const properties = cleanedString.split(';').filter(Boolean)
-
-    // Initialize an empty object to hold our styles
-    const styleObject = {}
-
-    properties.forEach((property) => {
-      // Split each property by the colon to get name and value
-      const [name, value] = property.split(':').map((str) => str.trim())
-
-      // Convert CSS property names to camelCase for React
-      const camelCaseName = name.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
-
-      // Add the property to our style object
-      styleObject[camelCaseName] = value
-    })
-
-    return styleObject
-  }
 
   const fadeAndDeselect = () => {
     setFade(true)
@@ -87,11 +65,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
       </form>
 
       <div className="mt-4">
-        {/* display element with style */}
-        <div
-          dangerouslySetInnerHTML={{ __html: entity.html }}
-          style={{ ...parseStyle(entity.css) }}
-        ></div>
+        <EntityRenderer entity={entity} />
       </div>
     </div>
   )
