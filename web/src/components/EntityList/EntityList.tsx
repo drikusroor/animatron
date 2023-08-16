@@ -1,6 +1,8 @@
 import { ISelection } from 'src/store/selection'
 import { IEntity } from 'src/types/entity.interface'
 
+import EntityRenderer from '../EntityRenderer/EntityRenderer'
+
 interface IEntityListProps {
   entities: IEntity[]
   selected: ISelection
@@ -32,7 +34,7 @@ const EntityList = (props: IEntityListProps) => {
           <li key={index}>
             <button
               data-testid="entity-list-item-button"
-              className={`mt-2 block w-full cursor-pointer rounded-lg px-2 py-2 text-left transition-colors hover:bg-gray-700
+              className={`relative mt-2 block w-full cursor-pointer rounded-lg px-2 py-2 pr-8 text-left transition-colors hover:bg-gray-700
                 ${isSelected(index) ? 'bg-gray-700 font-bold' : ''}`}
               onClick={() => select({ type: 'entity', path: [index] })}
               onKeyDown={(e) => onKeyDown(e, index)}
@@ -42,6 +44,10 @@ const EntityList = (props: IEntityListProps) => {
               tabIndex={0}
             >
               {entity.name}
+
+              <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+                <EntityRenderer entity={entity} maxHeight={32} maxWidth={32} />
+              </div>
             </button>
           </li>
         )
