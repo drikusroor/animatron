@@ -23,12 +23,6 @@ const EntityList = (props: IEntityListProps) => {
       event.stopPropagation()
       select({ type: 'entity', path: [index] })
     }
-
-    if (event.key === 'Home' || event.key === 'Escape') {
-      event.preventDefault()
-      event.stopPropagation()
-      select(null)
-    }
   }
 
   return (
