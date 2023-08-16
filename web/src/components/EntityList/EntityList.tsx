@@ -11,7 +11,7 @@ const EntityList = (props: IEntityListProps) => {
   const { entities, selected, select } = props
 
   const isSelected = (index: number) => {
-    return selected?.index === index && selected.type === 'entity'
+    return selected?.path[0] === index && selected.type === 'entity'
   }
 
   const onKeyDown = (
@@ -21,13 +21,7 @@ const EntityList = (props: IEntityListProps) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       event.stopPropagation()
-      select({ type: 'entity', index })
-    }
-
-    if (event.key === 'Home' || event.key === 'Escape') {
-      event.preventDefault()
-      event.stopPropagation()
-      select(null)
+      select({ type: 'entity', path: [index] })
     }
   }
 
@@ -40,7 +34,7 @@ const EntityList = (props: IEntityListProps) => {
               data-testid="entity-list-item-button"
               className={`mt-2 block w-full cursor-pointer rounded-lg px-2 py-2 text-left transition-colors hover:bg-gray-700
                 ${isSelected(index) ? 'bg-gray-700 font-bold' : ''}`}
-              onClick={() => select({ type: 'entity', index })}
+              onClick={() => select({ type: 'entity', path: [index] })}
               onKeyDown={(e) => onKeyDown(e, index)}
               role="option"
               aria-selected={isSelected(index)}

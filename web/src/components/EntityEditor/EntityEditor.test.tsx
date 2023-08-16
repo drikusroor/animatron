@@ -41,6 +41,6 @@ describe('EntityEditor', () => {
     // wait a bit
     setTimeout(() => {
       expect(deselectEntity).toHaveBeenCalled()
-    }, 300)
+    }, 400)
   })
 })

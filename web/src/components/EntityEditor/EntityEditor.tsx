@@ -69,7 +69,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
             name="html"
             rows={10}
             cols={50}
-            value={entity.html}
+            defaultValue={entity.html}
           />
         </div>
 
@@ -81,7 +81,7 @@ const EntityEditor = ({ entity, deselectEntity }: IEntityEditorProps) => {
             name="css"
             rows={10}
             cols={50}
-            value={entity.css}
+            defaultValue={entity.css}
           />
         </div>
       </form>
