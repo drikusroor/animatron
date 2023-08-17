@@ -26,6 +26,12 @@ const EntityEditor = ({
     }, 300)
   }
 
+  const updateEntityProperty =
+    (property: string) => (e: { target: { value: unknown } }) => {
+      const value = e.target.value
+      updateEntity({ ...entity, [property]: value })
+    }
+
   return (
     <div
       className={`h-full p-4 transition-opacity duration-300 ease-in-out ${
@@ -43,7 +49,7 @@ const EntityEditor = ({
         </button>
       </div>
 
-      <form className="mt-4 flex flex-row gap-4">
+      <form className="mt-4 grid grid-cols-2 gap-4">
         <div className="flex flex-col">
           <label htmlFor="html">HTML</label>
           <textarea
@@ -53,7 +59,7 @@ const EntityEditor = ({
             rows={10}
             cols={50}
             value={entity.html}
-            onChange={(e) => updateEntity({ ...entity, html: e.target.value })}
+            onChange={updateEntityProperty('html')}
           />
         </div>
 
@@ -66,7 +72,18 @@ const EntityEditor = ({
             rows={10}
             cols={50}
             value={entity.css}
-            onChange={(e) => updateEntity({ ...entity, css: e.target.value })}
+            onChange={updateEntityProperty('css')}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="image">Image</label>
+          <input
+            className="mt-1 bg-slate-700"
+            id="image"
+            name="image"
+            type="text"
+            value={entity.image}
+            onChange={updateEntityProperty('image')}
           />
         </div>
       </form>
