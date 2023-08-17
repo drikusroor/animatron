@@ -3,10 +3,13 @@ import { IKeyframe } from '../../types/keyframe.interface'
 interface KeyframeSpanProps {
   keyframe: IKeyframe
   isSelected: boolean
+  zoom: number
 }
 
-const KeyframeSpan = ({ keyframe, isSelected }: KeyframeSpanProps) => {
-  const spanWidth = keyframe.duration * 10 + 'px'
+const KeyframeSpan = ({ keyframe, isSelected, zoom }: KeyframeSpanProps) => {
+  const spanWidth = keyframe.duration * zoom + 'px'
+
+  console.log({ spanWidth, keyframe, isSelected, zoom })
 
   return (
     <div

@@ -18,7 +18,8 @@ const TrackDetails = ({
 }: ITrackDetailsProps) => {
   return (
     <div
-      className={`flex w-32 flex-row items-center border-r border-slate-600 bg-slate-700 px-2 text-slate-100 ${
+      className={`flex w-32 flex-row items-center border-r border-slate-600 px-2 text-slate-100 transition-colors hover:bg-slate-600
+      ${
         isSelected(selection, { path, type: 'track' })
           ? 'border-l-4 border-slate-100 font-bold'
           : ''

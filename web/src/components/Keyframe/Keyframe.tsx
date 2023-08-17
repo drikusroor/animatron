@@ -9,9 +9,16 @@ interface KeyframeProps {
   path: number[]
   select: (selection: ISelection) => void
   selection: ISelection
+  zoom: number
 }
 
-const Keyframe = ({ keyframe, path, select, selection }: KeyframeProps) => {
+const Keyframe = ({
+  keyframe,
+  path,
+  select,
+  selection,
+  zoom,
+}: KeyframeProps) => {
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
@@ -47,6 +54,7 @@ const Keyframe = ({ keyframe, path, select, selection }: KeyframeProps) => {
         <KeyframeSpan
           keyframe={keyframe}
           isSelected={isSelected(selection, { path, type: 'keyframe' })}
+          zoom={zoom}
         />
       )}
     </div>
