@@ -43,8 +43,20 @@ const EntityRenderer = ({
     return styleObject
   }
 
+  if (entity.image) {
+    return (
+      <img
+        data-testid="entity-image"
+        src={entity.image}
+        style={{ ...parseStyle(entity.css) }}
+        alt="entity"
+      />
+    )
+  }
+
   return (
     <div
+      data-testid="entity-html"
       dangerouslySetInnerHTML={{ __html: entity.html }}
       style={{ ...parseStyle(entity.css) }}
     ></div>

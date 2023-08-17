@@ -26,14 +26,22 @@ const EntityEditor = ({
     }, 300)
   }
 
+  const updateEntityProperty =
+    (property: string) => (e: { target: { value: unknown } }) => {
+      const value = e.target.value
+      updateEntity({ ...entity, [property]: value })
+    }
+
   return (
     <div
-      className={`h-full p-4 transition-opacity duration-300 ease-in-out ${
+      className={`h-full overflow-y-auto p-4 transition-opacity duration-300 ease-in-out ${
         fade ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Entity Editor</h1>
+        <h1 className="text-2xl">
+          Edit entity <span className="font-bold">{entity.name}</span>
+        </h1>
         <button
           data-testid="entity-editor-close-button"
           className="flex items-center justify-center rounded-lg bg-red-500 p-2 transition-colors duration-300 ease-in-out hover:bg-red-600"
@@ -43,7 +51,7 @@ const EntityEditor = ({
         </button>
       </div>
 
-      <form className="mt-4 flex flex-row gap-4">
+      <form className="mt-4 grid grid-cols-2 gap-4">
         <div className="flex flex-col">
           <label htmlFor="html">HTML</label>
           <textarea
@@ -53,7 +61,7 @@ const EntityEditor = ({
             rows={10}
             cols={50}
             value={entity.html}
-            onChange={(e) => updateEntity({ ...entity, html: e.target.value })}
+            onChange={updateEntityProperty('html')}
           />
         </div>
 
@@ -66,7 +74,29 @@ const EntityEditor = ({
             rows={10}
             cols={50}
             value={entity.css}
-            onChange={(e) => updateEntity({ ...entity, css: e.target.value })}
+            onChange={updateEntityProperty('css')}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            className="mt-1 bg-slate-700"
+            id="name"
+            name="name"
+            value={entity.name}
+            onChange={updateEntityProperty('name')}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="image">Image</label>
+          <input
+            className="mt-1 bg-slate-700"
+            id="image"
+            name="image"
+            type="text"
+            value={entity.image}
+            onChange={updateEntityProperty('image')}
           />
         </div>
       </form>
