@@ -34,7 +34,7 @@ const EntityEditor = ({
 
   return (
     <div
-      className={`h-full p-4 transition-opacity duration-300 ease-in-out ${
+      className={`h-full overflow-y-auto p-4 transition-opacity duration-300 ease-in-out ${
         fade ? 'opacity-0' : 'opacity-100'
       }`}
     >
