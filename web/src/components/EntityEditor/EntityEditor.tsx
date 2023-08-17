@@ -52,7 +52,7 @@ const EntityEditor = ({
             name="html"
             rows={10}
             cols={50}
-            defaultValue={entity.html}
+            value={entity.html}
             onChange={(e) => updateEntity({ ...entity, html: e.target.value })}
           />
         </div>
@@ -65,7 +65,7 @@ const EntityEditor = ({
             name="css"
             rows={10}
             cols={50}
-            defaultValue={entity.css}
+            value={entity.css}
             onChange={(e) => updateEntity({ ...entity, css: e.target.value })}
           />
         </div>
