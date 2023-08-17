@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand'
 
+import { IKeyframe } from 'src/types/keyframe.interface'
 import { ITrack } from 'src/types/track.interface'
 
 import { IRootState } from '.'
@@ -9,12 +10,13 @@ export interface ITracksState {
   addTrack: (track: ITrack) => void
   removeTrack: (track: ITrack) => void
   updateTrack: (track: ITrack) => void
+  updateKeyframe: (keyframe: IKeyframe, path?: number[]) => void
   setTracks: (tracks: ITrack[]) => void
 }
 
 const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
   set,
-  _x,
+  get,
   _y
 ) => ({
   tracks: [],
@@ -40,6 +42,41 @@ const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
       state.tracks[indexOf] = track
       return state
     }),
+  updateKeyframe: (updated: IKeyframe, path?: number[]) => {
+    // If no path is provided, use the current selection
+    if (!path) {
+      const currentSelection = get().selection
+
+      if (currentSelection.type !== 'keyframe') return
+
+      path = currentSelection.path
+    }
+
+    set((state) => {
+      const [trackIndex, clipIndex, keyframeIndex] = path
+
+      const tracks = [...state.tracks]
+      const track = tracks[trackIndex]
+      const clips = [...track.clips]
+      const clip = clips[clipIndex]
+      const keyframes = [...clip.keyframes]
+      keyframes[keyframeIndex] = updated
+
+      clips[clipIndex] = {
+        ...clip,
+        keyframes,
+      }
+
+      tracks[trackIndex] = {
+        ...track,
+        clips,
+      }
+
+      return {
+        tracks,
+      }
+    })
+  },
   setTracks: (tracks: ITrack[]) =>
     set(() => ({
       tracks,
