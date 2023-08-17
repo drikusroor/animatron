@@ -15,4 +15,22 @@ describe('EntityRenderer', () => {
       render(<EntityRenderer entity={entity} />)
     }).not.toThrow()
   })
+
+  it('renders an image if the entity has an image', () => {
+    const entity = createEntity({ image: 'https://via.placeholder.com/150' })
+
+    const { getByTestId } = render(<EntityRenderer entity={entity} />)
+
+    expect(getByTestId('entity-image')).toBeInTheDocument()
+    expect(getByTestId('entity-html')).not.toBeInTheDocument()
+  })
+
+  it('renders HTML if the entity does not have an image', () => {
+    const entity = createEntity({ image: null })
+
+    const { getByTestId } = render(<EntityRenderer entity={entity} />)
+
+    expect(getByTestId('entity-html')).toBeInTheDocument()
+    expect(getByTestId('entity-image')).not.toBeInTheDocument()
+  })
 })
