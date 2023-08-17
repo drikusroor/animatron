@@ -76,6 +76,9 @@ export const Success = (
   queryData: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>
 ) => {
   const setAnimation = useBoundStore((state) => state.setAnimation)
+  const _getAggregatedAnimation = useBoundStore(
+    (state) => state.getAggregatedAnimation
+  )
   const setEntities = useBoundStore((state) => state.setEntities)
   const setTracks = useBoundStore((state) => state.setTracks)
 
