@@ -1,9 +1,10 @@
-import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { StateCreator } from 'zustand'
 
 import { ITrack } from 'src/types/track.interface'
 
-interface ITracksState {
+import { IRootState } from '.'
+
+export interface ITracksState {
   tracks: ITrack[]
   addTrack: (track: ITrack) => void
   removeTrack: (track: ITrack) => void
@@ -11,42 +12,38 @@ interface ITracksState {
   setTracks: (tracks: ITrack[]) => void
 }
 
-const useTracksStore = create<ITracksState>()(
-  devtools(
-    (set) => ({
-      tracks: [],
-      addTrack: (track: ITrack) =>
-        set((state) => ({
-          tracks: [...state.tracks, track],
-        })),
-      removeTrack: (track: ITrack) =>
-        set((state) => {
-          const indexOf = state.tracks.indexOf(track)
+const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
+  set,
+  _x,
+  _y
+) => ({
+  tracks: [],
+  addTrack: (track: ITrack) =>
+    set((state) => ({
+      tracks: [...state.tracks, track],
+    })),
+  removeTrack: (track: ITrack) =>
+    set((state) => {
+      const indexOf = state.tracks.indexOf(track)
 
-          if (indexOf === -1) return state
+      if (indexOf === -1) return state
 
-          state.tracks.splice(indexOf, 1)
-          return state
-        }),
-      updateTrack: (track: ITrack) =>
-        set((state) => {
-          const indexOf = state.tracks.indexOf(track)
-
-          if (indexOf === -1) return state
-
-          state.tracks[indexOf] = track
-          return state
-        }),
-      setTracks: (tracks: ITrack[]) =>
-        set(() => ({
-          tracks,
-        })),
+      state.tracks.splice(indexOf, 1)
+      return state
     }),
+  updateTrack: (track: ITrack) =>
+    set((state) => {
+      const indexOf = state.tracks.indexOf(track)
 
-    {
-      name: 'tracks-storage',
-    }
-  )
-)
+      if (indexOf === -1) return state
 
-export default useTracksStore
+      state.tracks[indexOf] = track
+      return state
+    }),
+  setTracks: (tracks: ITrack[]) =>
+    set(() => ({
+      tracks,
+    })),
+})
+
+export default createTracksSlice

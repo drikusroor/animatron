@@ -5,9 +5,7 @@ import type {
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-import useAnimationStore from 'src/store/animation'
-import useEntitiesStore from 'src/store/entities'
-import useTracksStore from 'src/store/tracks'
+import { useBoundStore } from 'src/store'
 
 import AnimationEditor from '../AnimationEditor/AnimationEditor'
 
@@ -77,9 +75,9 @@ export const Failure = ({
 export const Success = (
   queryData: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>
 ) => {
-  const setAnimation = useAnimationStore((state) => state.setAnimation)
-  const setEntities = useEntitiesStore((state) => state.setEntities)
-  const setTracks = useTracksStore((state) => state.setTracks)
+  const setAnimation = useBoundStore((state) => state.setAnimation)
+  const setEntities = useBoundStore((state) => state.setEntities)
+  const setTracks = useBoundStore((state) => state.setTracks)
 
   const { animation, entities, tracks } = mapAnimationQueryData(queryData)
 

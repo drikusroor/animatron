@@ -1,13 +1,12 @@
-import useEntitiesStore from 'src/store/entities'
-import useSelectionStore from 'src/store/selection'
+import { useBoundStore } from 'src/store'
 
 import EntityList from '../EntityList/EntityList'
 
 const EntityListContainer = () => {
-  const select = useSelectionStore((state) => state.select)
-  const selected = useSelectionStore((state) => state.selection)
+  const select = useBoundStore((state) => state.select)
+  const selected = useBoundStore((state) => state.selection)
 
-  const entities = useEntitiesStore((state) => state.entities)
+  const entities = useBoundStore((state) => state.entities)
 
   return <EntityList entities={entities} select={select} selected={selected} />
 }

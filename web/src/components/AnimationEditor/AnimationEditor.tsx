@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 
-import useSelectionStore from 'src/store/selection'
+import { useBoundStore } from 'src/store'
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
 import EntityEditorContainer from '../EntityEditorContainer/EntityEditorContainer'
 import EntityListContainer from '../EntityListContainer/EntityListContainer'
+import KeyframeEditorContainer from '../KeyframeEditorContainer/KeyframeEditorContainer'
 import TrackManager from '../TrackManager/TrackManager'
 
 interface AnimationEditorProps {
@@ -14,8 +15,8 @@ interface AnimationEditorProps {
 }
 
 const AnimationEditor = (props: AnimationEditorProps) => {
-  const selection = useSelectionStore((state) => state.selection)
-  const select = useSelectionStore((state) => state.select)
+  const selection = useBoundStore((state) => state.selection)
+  const select = useBoundStore((state) => state.select)
 
   const { tracks } = props
 
@@ -44,6 +45,7 @@ const AnimationEditor = (props: AnimationEditorProps) => {
       </div>
       <div className="flex h-screen w-full flex-col justify-end border-e">
         <EntityEditorContainer />
+        <KeyframeEditorContainer />
         <TrackManager tracks={tracks} />
       </div>
     </div>
