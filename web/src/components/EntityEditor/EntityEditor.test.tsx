@@ -11,18 +11,30 @@ describe('EntityEditor', () => {
   it('renders successfully', () => {
     const entity = createEntity()
     const deselectEntity = jest.fn()
+    const updateEntity = jest.fn()
 
     expect(() => {
-      render(<EntityEditor entity={entity} deselectEntity={deselectEntity} />)
+      render(
+        <EntityEditor
+          entity={entity}
+          deselectEntity={deselectEntity}
+          updateEntity={updateEntity}
+        />
+      )
     }).not.toThrow()
   })
 
   it('renders the entity name', () => {
-    const entity = createEntity()
+    const entity = createEntity({ name: 'Very unique name' })
     const deselectEntity = jest.fn()
+    const updateEntity = jest.fn()
 
     const { getByText } = render(
-      <EntityEditor entity={entity} deselectEntity={deselectEntity} />
+      <EntityEditor
+        entity={entity}
+        deselectEntity={deselectEntity}
+        updateEntity={updateEntity}
+      />
     )
 
     expect(getByText(entity.name)).toBeInTheDocument()
@@ -31,9 +43,14 @@ describe('EntityEditor', () => {
   it('calls deselectEntity when the close button is clicked', () => {
     const entity = createEntity()
     const deselectEntity = jest.fn()
+    const updateEntity = jest.fn()
 
     const { getByTestId } = render(
-      <EntityEditor entity={entity} deselectEntity={deselectEntity} />
+      <EntityEditor
+        entity={entity}
+        deselectEntity={deselectEntity}
+        updateEntity={updateEntity}
+      />
     )
 
     getByTestId('entity-editor-close-button').click()

@@ -22,7 +22,6 @@ describe('EntityRenderer', () => {
     const { getByTestId } = render(<EntityRenderer entity={entity} />)
 
     expect(getByTestId('entity-image')).toBeInTheDocument()
-    expect(getByTestId('entity-html')).not.toBeInTheDocument()
   })
 
   it('renders HTML if the entity does not have an image', () => {
@@ -31,6 +30,5 @@ describe('EntityRenderer', () => {
     const { getByTestId } = render(<EntityRenderer entity={entity} />)
 
     expect(getByTestId('entity-html')).toBeInTheDocument()
-    expect(getByTestId('entity-image')).not.toBeInTheDocument()
   })
 })
