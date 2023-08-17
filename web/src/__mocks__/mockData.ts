@@ -8,6 +8,7 @@ export const keyframe: IKeyframe = {
   id: 1,
   duration: 20,
   sort: 0,
+  css: '{ color: red; }',
 }
 
 export function createKeyframe(overrides?: Partial<IKeyframe>): IKeyframe {

@@ -12,6 +12,7 @@ describe('Track', () => {
     const path = [0]
     const select = jest.fn()
     const selection = null
+    const zoom = 1
 
     expect(() => {
       render(
@@ -20,6 +21,7 @@ describe('Track', () => {
           path={path}
           select={select}
           selection={selection}
+          zoom={zoom}
         />
       )
     }).not.toThrow()

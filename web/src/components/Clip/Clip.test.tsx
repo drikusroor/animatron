@@ -12,10 +12,17 @@ describe('Clip', () => {
     const path = [0, 0]
     const select = jest.fn()
     const selection = null
+    const zoom = 1
 
     expect(() => {
       render(
-        <Clip clip={clip} path={path} select={select} selection={selection} />
+        <Clip
+          clip={clip}
+          path={path}
+          select={select}
+          selection={selection}
+          zoom={zoom}
+        />
       )
     }).not.toThrow()
   })
