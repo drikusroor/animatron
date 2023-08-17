@@ -55,7 +55,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           />
         ))}
       </div>
-      <div className="relative w-full">
+      <div className="group relative w-full">
         <div className="overflow-x-auto bg-slate-800" ref={scrollRef}>
           {tracks.map((track, index) => (
             <Track
@@ -71,7 +71,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
         </div>
         <div className="absolute right-2 top-2 z-10 flex flex-row items-center justify-center gap-1">
           <button
-            className="rounded-full p-2 transition-colors hover:bg-slate-600"
+            className="rounded-full p-2 opacity-10 transition hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg group-hover:opacity-100"
             title="Zoom in"
             aria-label="Zoom in"
             onClick={() => setZoom(zoom * 2)}
@@ -80,7 +80,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           </button>
 
           <button
-            className="rounded-full p-2 transition-colors hover:bg-slate-600"
+            className="rounded-full p-2 opacity-10 transition hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg group-hover:opacity-100"
             title="Zoom out"
             aria-label="Zoom out"
             onClick={() => setZoom(zoom / 2)}
