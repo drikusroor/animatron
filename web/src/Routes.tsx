@@ -17,7 +17,7 @@ const Routes = () => {
     <Router>
       <Set wrap={AppLayout}>
         <Route path="/app" page={AppPage} name="app" />
-        <Route path="/animation-viewer/{id}" page={AnimationViewerPage} name="animationViewer" />
+        <Route path="/animation/{id}" page={AnimationViewerPage} name="animation" />
       </Set>
       <Set wrap={BlogLayout}>
         <Route path="/" page={FrontPage} name="front" />

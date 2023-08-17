@@ -1,9 +1,13 @@
 import type {
   FindAnimationQuery,
   FindAnimationQueryVariables,
+  UpdateAnimationInput,
 } from 'types/graphql'
 
+import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
 
 import { useBoundStore } from 'src/store'
 
@@ -62,6 +66,55 @@ export const QUERY = gql`
   }
 `
 
+const UPDATE_ANIMATION_MUTATION = gql`
+  mutation UpdateAnimationMutation($id: Int!, $input: UpdateAnimationInput!) {
+    updateAnimation(id: $id, input: $input) {
+      id
+      name
+      description
+      animationHistoryId
+      version
+
+      entities {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        image
+        html
+        css
+      }
+
+      tracks {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        sortNumber
+        color
+
+        clips {
+          id
+          uuid
+          start
+          animationTrackId
+          animationEntityId
+
+          keyframes {
+            id
+            uuid
+            sort
+            duration
+            css
+          }
+        }
+      }
+    }
+  }
+`
+
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => <div>Empty</div>
@@ -75,8 +128,28 @@ export const Failure = ({
 export const Success = (
   queryData: CellSuccessProps<FindAnimationQuery, FindAnimationQueryVariables>
 ) => {
+  const [updateAnimation, { loading, error }] = useMutation(
+    UPDATE_ANIMATION_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Animation updated')
+        navigate(routes.animation())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
+
+  const onSave = (
+    input: UpdateAnimationInput,
+    id: EditAnimationById['animation']['id']
+  ) => {
+    updateAnimation({ variables: { id, input } })
+  }
+
   const setAnimation = useBoundStore((state) => state.setAnimation)
-  const _getAggregatedAnimation = useBoundStore(
+  const getAggregatedAnimation = useBoundStore(
     (state) => state.getAggregatedAnimation
   )
   const setEntities = useBoundStore((state) => state.setEntities)
@@ -88,5 +161,15 @@ export const Success = (
   setEntities(entities)
   setTracks(tracks)
 
-  return <AnimationEditor entities={entities} tracks={tracks} />
+  const aggregatedAnimation = getAggregatedAnimation()
+
+  return (
+    <AnimationEditor
+      entities={entities}
+      tracks={tracks}
+      onSave={() => onSave(aggregatedAnimation, animation.id)}
+      error={error}
+      loading={loading}
+    />
+  )
 }
