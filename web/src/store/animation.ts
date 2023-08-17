@@ -1,27 +1,25 @@
-import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { StateCreator } from 'zustand'
 
 import { IAnimation } from 'src/types/animation.interface'
 
-interface IAnimationState {
+import { IRootState } from '.'
+
+export interface IAnimationState {
   animation: IAnimation
   setAnimation: (animation: IAnimation) => void
 }
 
-const useAnimationStore = create<IAnimationState>()(
-  devtools(
-    (set) => ({
-      animation: null,
-      setAnimation: (animation: IAnimation) =>
-        set(() => ({
-          animation,
-        })),
-    }),
+const createAnimationSlice: StateCreator<
+  IRootState,
+  [],
+  [],
+  IAnimationState
+> = (set) => ({
+  animation: null,
+  setAnimation: (animation: IAnimation) =>
+    set(() => ({
+      animation,
+    })),
+})
 
-    {
-      name: 'animation-storage',
-    }
-  )
-)
-
-export default useAnimationStore
+export default createAnimationSlice

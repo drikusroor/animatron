@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import useSelectionStore from 'src/store/selection'
+import { useBoundStore } from 'src/store'
 import { ITrack } from 'src/types/track.interface'
 
 import Track from '../Track/Track'
@@ -15,8 +15,8 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const [showShadow, setShowShadow] = useState(false)
 
-  const select = useSelectionStore((state) => state.select)
-  const selection = useSelectionStore((state) => state.selection)
+  const select = useBoundStore((state) => state.select)
+  const selection = useBoundStore((state) => state.selection)
 
   const handleScroll = (e: Event) => {
     const scrollPosition = (e.currentTarget as HTMLDivElement).scrollLeft

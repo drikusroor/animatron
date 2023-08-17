@@ -1,16 +1,15 @@
-import useEntitiesStore from 'src/store/entities'
-import useSelectionStore from 'src/store/selection'
+import { useBoundStore } from 'src/store'
 
 import EntityEditor from '../EntityEditor/EntityEditor'
 
 const EntityEditorContainer = () => {
-  const currentSelection = useSelectionStore((state) => state.selection)
+  const currentSelection = useBoundStore((state) => state.selection)
 
-  const select = useSelectionStore((state) => state.select)
+  const select = useBoundStore((state) => state.select)
   const deselectEntity = () => select(null)
 
-  const entities = useEntitiesStore((state) => state.entities)
-  const updateEntity = useEntitiesStore((state) => state.updateEntity)
+  const entities = useBoundStore((state) => state.entities)
+  const updateEntity = useBoundStore((state) => state.updateEntity)
 
   if (currentSelection?.type !== 'entity') return null
 

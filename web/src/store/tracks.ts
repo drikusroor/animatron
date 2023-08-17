@@ -1,52 +1,86 @@
-import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { StateCreator } from 'zustand'
 
+import { IKeyframe } from 'src/types/keyframe.interface'
 import { ITrack } from 'src/types/track.interface'
 
-interface ITracksState {
+import { IRootState } from '.'
+
+export interface ITracksState {
   tracks: ITrack[]
   addTrack: (track: ITrack) => void
   removeTrack: (track: ITrack) => void
   updateTrack: (track: ITrack) => void
+  updateKeyframe: (keyframe: IKeyframe, path?: number[]) => void
   setTracks: (tracks: ITrack[]) => void
 }
 
-const useTracksStore = create<ITracksState>()(
-  devtools(
-    (set) => ({
-      tracks: [],
-      addTrack: (track: ITrack) =>
-        set((state) => ({
-          tracks: [...state.tracks, track],
-        })),
-      removeTrack: (track: ITrack) =>
-        set((state) => {
-          const indexOf = state.tracks.indexOf(track)
+const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
+  set,
+  get,
+  _y
+) => ({
+  tracks: [],
+  addTrack: (track: ITrack) =>
+    set((state) => ({
+      tracks: [...state.tracks, track],
+    })),
+  removeTrack: (track: ITrack) =>
+    set((state) => {
+      const indexOf = state.tracks.indexOf(track)
 
-          if (indexOf === -1) return state
+      if (indexOf === -1) return state
 
-          state.tracks.splice(indexOf, 1)
-          return state
-        }),
-      updateTrack: (track: ITrack) =>
-        set((state) => {
-          const indexOf = state.tracks.indexOf(track)
-
-          if (indexOf === -1) return state
-
-          state.tracks[indexOf] = track
-          return state
-        }),
-      setTracks: (tracks: ITrack[]) =>
-        set(() => ({
-          tracks,
-        })),
+      state.tracks.splice(indexOf, 1)
+      return state
     }),
+  updateTrack: (track: ITrack) =>
+    set((state) => {
+      const indexOf = state.tracks.indexOf(track)
 
-    {
-      name: 'tracks-storage',
+      if (indexOf === -1) return state
+
+      state.tracks[indexOf] = track
+      return state
+    }),
+  updateKeyframe: (updated: IKeyframe, path?: number[]) => {
+    // If no path is provided, use the current selection
+    if (!path) {
+      const currentSelection = get().selection
+
+      if (currentSelection.type !== 'keyframe') return
+
+      path = currentSelection.path
     }
-  )
-)
 
-export default useTracksStore
+    set((state) => {
+      const [trackIndex, clipIndex, keyframeIndex] = path
+
+      const tracks = [...state.tracks]
+      const track = tracks[trackIndex]
+      const clips = [...track.clips]
+      const clip = clips[clipIndex]
+      const keyframes = [...clip.keyframes]
+      keyframes[keyframeIndex] = updated
+
+      clips[clipIndex] = {
+        ...clip,
+        keyframes,
+      }
+
+      tracks[trackIndex] = {
+        ...track,
+        clips,
+      }
+
+      return {
+        tracks,
+      }
+    })
+  },
+  setTracks: (tracks: ITrack[]) =>
+    set(() => ({
+      tracks,
+    })),
+})
+
+export default createTracksSlice
