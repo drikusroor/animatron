@@ -69,7 +69,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
             />
           ))}
         </div>
-        <div className="absolute right-5 top-0 z-10 flex h-full w-8 flex-row items-center justify-center gap-1">
+        <div className="absolute right-2 top-2 z-10 flex flex-row items-center justify-center gap-1">
           <button
             className="rounded-full p-2 transition-colors hover:bg-slate-600"
             title="Zoom in"
