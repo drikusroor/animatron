@@ -8,9 +8,10 @@ interface IClipProps {
   path: number[]
   select: (selection: ISelection) => void
   selection: ISelection
+  zoom: number
 }
 
-const Clip = ({ clip, path, select, selection }: IClipProps) => {
+const Clip = ({ clip, path, select, selection, zoom }: IClipProps) => {
   const clipIndex = path[path.length - 1]
 
   const onKeyDown = (
@@ -26,11 +27,15 @@ const Clip = ({ clip, path, select, selection }: IClipProps) => {
 
   return (
     <div
-      className={`-ml-3 -mt-2 flex cursor-pointer flex-row rounded-2xl bg-slate-700 p-2 pl-3 hover:bg-slate-600 ${
+      className={`absolute -ml-3 mt-2 flex cursor-pointer flex-row rounded-2xl bg-slate-700 p-2 pl-3 transition-all hover:bg-slate-600
+      ${
         isSelected(selection, { path, type: 'clip' })
           ? 'border border-slate-500'
           : ''
       }`}
+      style={{
+        left: `${clip.start * zoom}px`,
+      }}
       onClick={() => select({ type: 'clip', path })}
       onKeyDown={(e) => onKeyDown(e, clipIndex)}
       role="option"
@@ -48,6 +53,7 @@ const Clip = ({ clip, path, select, selection }: IClipProps) => {
           path={[...path, index]}
           select={select}
           selection={selection}
+          zoom={zoom}
         />
       ))}
     </div>

@@ -9,9 +9,17 @@ interface ITrackProps {
   path: number[]
   select: (selection: ISelection) => void
   selection: ISelection
+  zoom: number
 }
 
-const Track = ({ track, height, path, select, selection }: ITrackProps) => {
+const Track = ({
+  track,
+  height,
+  path,
+  select,
+  selection,
+  zoom,
+}: ITrackProps) => {
   const backgroundColorStyle = track.color
     ? { backgroundColor: track.color }
     : {}
@@ -20,9 +28,9 @@ const Track = ({ track, height, path, select, selection }: ITrackProps) => {
   return (
     <div
       style={{ ...backgroundColorStyle, ...heightStyle }}
-      className="w-full bg-slate-800 pl-3"
+      className="w-full pl-3"
     >
-      <div className="flex items-center border-l border-slate-400 py-3">
+      <div className="relative flex items-center border-l border-slate-400 py-3">
         {track.clips.map((clip, index) => (
           <Clip
             key={index}
@@ -30,6 +38,7 @@ const Track = ({ track, height, path, select, selection }: ITrackProps) => {
             path={[...path, index]}
             select={select}
             selection={selection}
+            zoom={zoom}
           />
         ))}
       </div>

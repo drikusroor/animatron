@@ -1,5 +1,7 @@
 import { render } from '@redwoodjs/testing/web'
 
+import { createKeyframe } from 'src/__mocks__/mockData'
+
 import KeyframeSpan from './KeyframeSpan'
 
 //   Improve this test with help from the Redwood Testing Doc:
@@ -8,12 +10,13 @@ import KeyframeSpan from './KeyframeSpan'
 describe('KeyframeSpan', () => {
   it('renders successfully', () => {
     expect(() => {
-      const keyframe = {
-        id: 1,
-        duration: 10,
-      }
+      const keyframe = createKeyframe()
+      const isSelected = false
+      const zoom = 1
 
-      render(<KeyframeSpan keyframe={keyframe} />)
+      render(
+        <KeyframeSpan keyframe={keyframe} isSelected={isSelected} zoom={zoom} />
+      )
     }).not.toThrow()
   })
 })
