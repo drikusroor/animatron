@@ -22,8 +22,7 @@ export const schema = gql`
   input CreateAnimationEntityInput {
     name: String!
     description: String
-    uuid: String!
-    revisionId: Int!
+    uuid: String
     image: String!
     html: String!
     css: String!
