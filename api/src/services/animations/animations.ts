@@ -36,21 +36,14 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
     data: {
       ...animationInput,
       version,
+      entities: {
+        create: entities,
+      },
+    },
+    include: {
+      entities: true,
     },
   })
-
-  const createdEntities = await Promise.all(
-    entities.map((entity) => {
-      const { uuid: _uuid, ...entityInput } = entity
-
-      return db.animationEntity.create({
-        data: {
-          ...entityInput,
-          revisionId: createdAnimation.id,
-        },
-      })
-    })
-  )
 
   const createdTracks = await Promise.all(
     tracks.map(async (track) => {
@@ -75,7 +68,8 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
             (entity) => entity.uuid === animationEntityUuid
           )
 
-          const animationEntityId = createdEntities[createdEntityIndex].id
+          const animationEntityId =
+            createdAnimation.entities[createdEntityIndex].id
 
           return db.animationTrackClip
             .create({
@@ -114,7 +108,7 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
 
   return {
     ...createdAnimation,
-    entities: createdEntities,
+    entities: createdAnimation.entities,
     tracks: createdTracks,
   }
 }
