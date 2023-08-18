@@ -75,13 +75,6 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
             (entity) => entity.uuid === animationEntityUuid
           )
 
-          console.log({
-            entities,
-            createdEntities,
-            createdEntityIndex,
-            animationEntityUuid,
-          })
-
           const animationEntityId = createdEntities[createdEntityIndex].id
 
           return db.animationTrackClip

@@ -33,8 +33,39 @@ describe('animations', () => {
       input: {
         name: 'String',
         animationHistoryId: scenario.animation.two.animationHistoryId,
-        version: 807652,
-        updatedAt: '2023-08-12T22:03:56.298Z',
+        version: scenario.animation.two.version,
+        entities: [
+          {
+            name: 'Entity name 1',
+            image: 'String',
+            html: 'String',
+            css: 'String',
+            uuid: '1281a0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0a',
+          },
+        ],
+        tracks: [
+          {
+            name: 'String',
+            description: 'String',
+            uuid: 'String',
+            sortNumber: 1,
+            clips: [
+              {
+                uuid: 'String',
+                start: 1,
+                animationEntityUuid: '1281a0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0a',
+                keyframes: [
+                  {
+                    uuid: '1972a0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0a',
+                    css: 'String',
+                    duration: 1,
+                    sort: 1,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     })
 
@@ -42,8 +73,8 @@ describe('animations', () => {
     expect(result.animationHistoryId).toEqual(
       scenario.animation.two.animationHistoryId
     )
-    expect(result.version).toEqual(807652)
-    expect(result.updatedAt).toEqual(new Date('2023-08-12T22:03:56.298Z'))
+    expect(result.version).toEqual(scenario.animation.two.version + 1)
+    expect(result.entities[0].name).toEqual('Entity name 1')
   })
 
   scenario('updates a animation', async (scenario: StandardScenario) => {

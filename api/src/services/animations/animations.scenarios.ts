@@ -7,7 +7,7 @@ export const standard = defineScenario<Prisma.AnimationCreateArgs>({
     one: {
       data: {
         name: 'String',
-        version: 8508796,
+        version: 666,
         updatedAt: '2023-08-12T22:03:56.314Z',
         AnimationHistory: {
           create: {
@@ -21,7 +21,7 @@ export const standard = defineScenario<Prisma.AnimationCreateArgs>({
     two: {
       data: {
         name: 'String',
-        version: 8999078,
+        version: 333,
         updatedAt: '2023-08-12T22:03:56.314Z',
         AnimationHistory: {
           create: {
