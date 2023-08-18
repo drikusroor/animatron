@@ -71,31 +71,19 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
           const animationEntityId =
             createdAnimation.entities[createdEntityIndex].id
 
-          return db.animationTrackClip
-            .create({
-              data: {
-                ...clipInput,
-                animationTrackId: createdTrack.id,
-                animationEntityId,
+          return db.animationTrackClip.create({
+            data: {
+              ...clipInput,
+              animationTrackId: createdTrack.id,
+              animationEntityId,
+              keyframes: {
+                create: clip.keyframes,
               },
-            })
-            .then(async (createdClip) => {
-              const keyframes = await Promise.all(
-                clip.keyframes.map((keyframe) => {
-                  return db.animationTrackKeyframe.create({
-                    data: {
-                      ...keyframe,
-                      animationTrackClipId: createdClip.id,
-                    },
-                  })
-                })
-              )
-
-              return {
-                ...createdClip,
-                keyframes,
-              }
-            })
+            },
+            include: {
+              keyframes: true,
+            },
+          })
         })
       )
 

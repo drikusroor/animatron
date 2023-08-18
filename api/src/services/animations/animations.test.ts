@@ -57,7 +57,7 @@ describe('animations', () => {
                 keyframes: [
                   {
                     uuid: '1972a0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0a',
-                    css: 'String',
+                    css: 'Crazy keyframe',
                     duration: 1,
                     sort: 1,
                   },
@@ -77,6 +77,8 @@ describe('animations', () => {
     expect(result.entities[0].name).toEqual('Entity name 1')
     expect(result.tracks.length).toEqual(1)
     expect(result.tracks[0].clips.length).toEqual(1)
+    expect(result.tracks[0].clips[0].keyframes.length).toEqual(1)
+    expect(result.tracks[0].clips[0].keyframes[0].css).toEqual('Crazy keyframe')
     expect(result.entities[0].id).toEqual(
       result.tracks[0].clips[0].animationEntityId
     )
