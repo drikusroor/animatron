@@ -63,7 +63,7 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
         },
       })
 
-      const createdClips = Promise.all(
+      const createdClips = await Promise.all(
         track.clips.map((clip) => {
           const {
             animationEntityUuid,

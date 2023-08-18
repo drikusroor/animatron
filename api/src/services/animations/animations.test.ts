@@ -51,7 +51,7 @@ describe('animations', () => {
             sortNumber: 1,
             clips: [
               {
-                uuid: 'String',
+                uuid: '8127a0b0-0b1a-4b0e-660a-9b0a9b0a9b0a',
                 start: 1,
                 animationEntityUuid: '1281a0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0a',
                 keyframes: [
@@ -75,6 +75,11 @@ describe('animations', () => {
     )
     expect(result.version).toEqual(scenario.animation.two.version + 1)
     expect(result.entities[0].name).toEqual('Entity name 1')
+    expect(result.tracks.length).toEqual(1)
+    expect(result.tracks[0].clips.length).toEqual(1)
+    expect(result.entities[0].id).toEqual(
+      result.tracks[0].clips[0].animationEntityId
+    )
   })
 
   scenario('updates a animation', async (scenario: StandardScenario) => {
