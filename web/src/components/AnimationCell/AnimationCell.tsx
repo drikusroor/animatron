@@ -28,8 +28,10 @@ export const QUERY = gql`
 
       entities {
         id
+        uuid
         name
         description
+        revisionId
         createdAt
         updatedAt
         image
@@ -41,6 +43,7 @@ export const QUERY = gql`
         id
         name
         description
+        revisionId
         createdAt
         updatedAt
         sortNumber
@@ -67,16 +70,15 @@ export const QUERY = gql`
 `
 
 const UPDATE_ANIMATION_MUTATION = gql`
-  mutation UpdateAnimationMutation($id: Int!, $input: UpdateAnimationInput!) {
-    updateAnimation(id: $id, input: $input) {
-      id
+  mutation UpdateAnimationMutation($input: CreateAnimationInput!) {
+    createAnimation(input: $input) {
       name
       description
       animationHistoryId
       version
 
       entities {
-        id
+        uuid
         name
         description
         createdAt
@@ -87,7 +89,6 @@ const UPDATE_ANIMATION_MUTATION = gql`
       }
 
       tracks {
-        id
         name
         description
         createdAt
@@ -96,14 +97,12 @@ const UPDATE_ANIMATION_MUTATION = gql`
         color
 
         clips {
-          id
           uuid
           start
           animationTrackId
           animationEntityId
 
           keyframes {
-            id
             uuid
             sort
             duration
@@ -141,11 +140,10 @@ export const Success = (
     }
   )
 
-  const onSave = (
-    input: UpdateAnimationInput,
-    id: EditAnimationById['animation']['id']
-  ) => {
-    updateAnimation({ variables: { id, input } })
+  const onSave = () => {
+    const input: UpdateAnimationInput = getAggregatedAnimation()
+
+    updateAnimation({ variables: { input } })
   }
 
   const setAnimation = useBoundStore((state) => state.setAnimation)
@@ -161,13 +159,11 @@ export const Success = (
   setEntities(entities)
   setTracks(tracks)
 
-  const aggregatedAnimation = getAggregatedAnimation()
-
   return (
     <AnimationEditor
       entities={entities}
       tracks={tracks}
-      onSave={() => onSave(aggregatedAnimation, animation.id)}
+      onSave={onSave}
       error={error}
       loading={loading}
     />

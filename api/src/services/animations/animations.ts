@@ -16,12 +16,114 @@ export const animation: QueryResolvers['animation'] = ({ id }) => {
   })
 }
 
-export const createAnimation: MutationResolvers['createAnimation'] = ({
+export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {
-  return db.animation.create({
-    data: input,
+  const { tracks, entities, ...animationInput } = input
+
+  const latestAnimation = await db.animation.findFirst({
+    where: {
+      animationHistoryId: input.animationHistoryId,
+    },
+    orderBy: {
+      version: 'desc',
+    },
   })
+
+  const version = latestAnimation ? latestAnimation.version + 1 : 1
+
+  const createdAnimation = await db.animation.create({
+    data: {
+      ...animationInput,
+      version,
+    },
+  })
+
+  const createdEntities = await Promise.all(
+    entities.map((entity) => {
+      const { uuid: _uuid, ...entityInput } = entity
+
+      return db.animationEntity.create({
+        data: {
+          ...entityInput,
+          revisionId: createdAnimation.id,
+        },
+      })
+    })
+  )
+
+  const createdTracks = await Promise.all(
+    tracks.map(async (track) => {
+      const { clips: _clips, ...trackInput } = track
+
+      const createdTrack = await db.animationTrack.create({
+        data: {
+          ...trackInput,
+          revisionId: createdAnimation.id,
+        },
+      })
+
+      const createdClips = Promise.all(
+        track.clips.map((clip) => {
+          const {
+            animationEntityUuid,
+            keyframes: _keyframes,
+            ...clipInput
+          } = clip
+
+          const createdEntityIndex = entities.findIndex(
+            (entity) => entity.uuid === animationEntityUuid
+          )
+
+          console.log({
+            entities,
+            createdEntities,
+            createdEntityIndex,
+            animationEntityUuid,
+          })
+
+          const animationEntityId = createdEntities[createdEntityIndex].id
+
+          return db.animationTrackClip
+            .create({
+              data: {
+                ...clipInput,
+                animationTrackId: createdTrack.id,
+                animationEntityId,
+              },
+            })
+            .then(async (createdClip) => {
+              const keyframes = await Promise.all(
+                clip.keyframes.map((keyframe) => {
+                  return db.animationTrackKeyframe.create({
+                    data: {
+                      ...keyframe,
+                      animationTrackClipId: createdClip.id,
+                    },
+                  })
+                })
+              )
+
+              return {
+                ...createdClip,
+                keyframes,
+              }
+            })
+        })
+      )
+
+      return {
+        ...createdTrack,
+        clips: createdClips,
+      }
+    })
+  )
+
+  return {
+    ...createdAnimation,
+    entities: createdEntities,
+    tracks: createdTracks,
+  }
 }
 
 export const updateAnimation: MutationResolvers['updateAnimation'] = ({

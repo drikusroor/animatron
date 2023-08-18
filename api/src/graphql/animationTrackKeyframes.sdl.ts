@@ -15,11 +15,10 @@ export const schema = gql`
   }
 
   input CreateAnimationTrackKeyframeInput {
-    uuid: String!
+    uuid: String
     sort: Int!
     duration: Int!
     css: String!
-    animationTrackClipId: Int
   }
 
   input UpdateAnimationTrackKeyframeInput {

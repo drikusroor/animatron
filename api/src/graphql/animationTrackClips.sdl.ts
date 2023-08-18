@@ -16,10 +16,10 @@ export const schema = gql`
   }
 
   input CreateAnimationTrackClipInput {
-    uuid: String!
+    uuid: String
     start: Int!
-    animationTrackId: Int!
-    animationEntityId: Int!
+    animationEntityUuid: String!
+    keyframes: [CreateAnimationTrackKeyframeInput!]
   }
 
   input UpdateAnimationTrackClipInput {

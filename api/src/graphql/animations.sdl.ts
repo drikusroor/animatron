@@ -21,9 +21,11 @@ export const schema = gql`
   input CreateAnimationInput {
     name: String!
     description: String
-    uuid: String!
+    uuid: String
     animationHistoryId: Int!
     version: Int!
+    tracks: [CreateAnimationTrackInput!]
+    entities: [CreateAnimationEntityInput!]
   }
 
   input UpdateAnimationInput {

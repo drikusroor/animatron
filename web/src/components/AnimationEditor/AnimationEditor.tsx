@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
 
-import { UpdateAnimationInput } from 'types/graphql'
-
 import { RWGqlError } from '@redwoodjs/forms'
 
 import { useBoundStore } from 'src/store'

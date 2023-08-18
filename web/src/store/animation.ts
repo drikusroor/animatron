@@ -1,13 +1,19 @@
 import { StateCreator } from 'zustand'
 
-import { IAnimation, IAnimationAggregated } from 'src/types/animation.interface'
+import {
+  IAnimation,
+  IAnimationAggregated,
+  IAnimationInput,
+  mapAnimationAggregatedToAnimationInput,
+  mapAnimationToAnimationAggregated,
+} from 'src/types/animation.interface'
 
 import { IRootState } from '.'
 
 export interface IAnimationState {
   animation: IAnimation
   setAnimation: (animation: IAnimation) => void
-  getAggregatedAnimation: () => IAnimationAggregated
+  getAggregatedAnimation: () => IAnimationInput
 }
 
 const createAnimationSlice: StateCreator<
@@ -23,11 +29,14 @@ const createAnimationSlice: StateCreator<
     })),
   getAggregatedAnimation: () => {
     const { animation, entities, tracks } = get()
-    return {
-      ...animation,
-      entities,
-      tracks,
-    }
+
+    const aggregatedAnimation: IAnimationAggregated =
+      mapAnimationToAnimationAggregated(animation, entities, tracks)
+
+    const animationInput =
+      mapAnimationAggregatedToAnimationInput(aggregatedAnimation)
+
+    return animationInput
   },
 })
 
