@@ -53,50 +53,46 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
         data: {
           ...trackInput,
           revisionId: createdAnimation.id,
+          clips: {
+            create: track.clips.map((clip) => {
+              const {
+                animationEntityUuid,
+                keyframes: _keyframes,
+                ...clipInput
+              } = clip
+
+              const createdEntityIndex = entities.findIndex(
+                (entity) => entity.uuid === animationEntityUuid
+              )
+
+              const animationEntityId =
+                createdAnimation.entities[createdEntityIndex].id
+
+              return {
+                ...clipInput,
+                animationEntityId,
+                keyframes: {
+                  create: clip.keyframes,
+                },
+              }
+            }),
+          },
         },
-      })
-
-      const createdClips = await Promise.all(
-        track.clips.map((clip) => {
-          const {
-            animationEntityUuid,
-            keyframes: _keyframes,
-            ...clipInput
-          } = clip
-
-          const createdEntityIndex = entities.findIndex(
-            (entity) => entity.uuid === animationEntityUuid
-          )
-
-          const animationEntityId =
-            createdAnimation.entities[createdEntityIndex].id
-
-          return db.animationTrackClip.create({
-            data: {
-              ...clipInput,
-              animationTrackId: createdTrack.id,
-              animationEntityId,
-              keyframes: {
-                create: clip.keyframes,
-              },
-            },
+        include: {
+          clips: {
             include: {
               keyframes: true,
             },
-          })
-        })
-      )
+          },
+        },
+      })
 
-      return {
-        ...createdTrack,
-        clips: createdClips,
-      }
+      return createdTrack
     })
   )
 
   return {
     ...createdAnimation,
-    entities: createdAnimation.entities,
     tracks: createdTracks,
   }
 }
