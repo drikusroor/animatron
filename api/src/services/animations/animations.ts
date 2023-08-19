@@ -6,6 +6,12 @@ import type {
 
 import { db } from 'src/lib/db'
 
+import {
+  createNewAnimation,
+  createTracksForAnimation,
+  getNextVersion,
+} from './helpers/create-animation'
+
 export const animations: QueryResolvers['animations'] = () => {
   return db.animation.findMany()
 }
@@ -21,74 +27,16 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
 }) => {
   const { tracks, entities, ...animationInput } = input
 
-  const latestAnimation = await db.animation.findFirst({
-    where: {
-      animationHistoryId: input.animationHistoryId,
-    },
-    orderBy: {
-      version: 'desc',
-    },
-  })
-
-  const version = latestAnimation ? latestAnimation.version + 1 : 1
-
-  const createdAnimation = await db.animation.create({
-    data: {
-      ...animationInput,
-      version,
-      entities: {
-        create: entities,
-      },
-    },
-    include: {
-      entities: true,
-    },
-  })
-
-  const createdTracks = await Promise.all(
-    tracks.map(async (track) => {
-      const { clips: _clips, ...trackInput } = track
-
-      const createdTrack = await db.animationTrack.create({
-        data: {
-          ...trackInput,
-          revisionId: createdAnimation.id,
-          clips: {
-            create: track.clips.map((clip) => {
-              const {
-                animationEntityUuid,
-                keyframes: _keyframes,
-                ...clipInput
-              } = clip
-
-              const createdEntityIndex = entities.findIndex(
-                (entity) => entity.uuid === animationEntityUuid
-              )
-
-              const animationEntityId =
-                createdAnimation.entities[createdEntityIndex].id
-
-              return {
-                ...clipInput,
-                animationEntityId,
-                keyframes: {
-                  create: clip.keyframes,
-                },
-              }
-            }),
-          },
-        },
-        include: {
-          clips: {
-            include: {
-              keyframes: true,
-            },
-          },
-        },
-      })
-
-      return createdTrack
-    })
+  const version = await getNextVersion(input.animationHistoryId)
+  const createdAnimation = await createNewAnimation(
+    animationInput,
+    entities,
+    version
+  )
+  const createdTracks = await createTracksForAnimation(
+    tracks,
+    entities,
+    createdAnimation
   )
 
   return {
