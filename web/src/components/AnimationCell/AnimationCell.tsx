@@ -16,8 +16,11 @@ import AnimationEditor from '../AnimationEditor/AnimationEditor'
 import { mapAnimationQueryData } from './helpers/map'
 
 export const QUERY = gql`
-  query FindAnimationQuery($id: Int!) {
-    animation: animation(id: $id) {
+  query FindAnimationQuery($animationHistoryUuid: String!, $version: Int!) {
+    animation: animationByHistoryUuidAndVersion(
+      animationHistoryUuid: $animationHistoryUuid
+      version: $version
+    ) {
       id
       name
       description

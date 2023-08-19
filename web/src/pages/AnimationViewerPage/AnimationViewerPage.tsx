@@ -3,17 +3,22 @@ import { MetaTags } from '@redwoodjs/web'
 import AnimationCell from 'src/components/AnimationCell'
 
 interface AnimationViewerPageProps {
-  id: string
+  animationHistoryUuid: string
+  version: string
 }
 
 const AnimationViewerPage = (props: AnimationViewerPageProps) => {
-  const id = parseInt(props.id)
+  const { animationHistoryUuid } = props
+  const version = parseInt(props.version)
 
   return (
     <>
       <MetaTags title="AnimationViewer" description="AnimationViewer page" />
 
-      <AnimationCell id={id} />
+      <AnimationCell
+        animationHistoryUuid={animationHistoryUuid}
+        version={version}
+      />
     </>
   )
 }

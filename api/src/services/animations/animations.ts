@@ -22,6 +22,42 @@ export const animation: QueryResolvers['animation'] = ({ id }) => {
   })
 }
 
+export const animationByHistoryUuidAndVersion: QueryResolvers['animationByHistoryUuidAndVersion'] =
+  async (input) => {
+    const { animationHistoryUuid, version } = input
+
+    const animationHistory = await db.animationHistory.findFirst({
+      where: {
+        uuid: animationHistoryUuid,
+      },
+    })
+
+    if (!animationHistory) {
+      throw new Error(
+        `No animation history found with uuid: ${animationHistoryUuid}`
+      )
+    }
+
+    const animation = await db.animation.findFirst({
+      where: {
+        version,
+        animationHistoryId: animationHistory?.id,
+      },
+      include: {
+        tracks: true,
+        entities: true,
+      },
+    })
+
+    if (!animation) {
+      throw new Error(
+        `No animation found with version: ${version} for animation history: ${animationHistoryUuid} / ${animationHistory?.id}`
+      )
+    }
+
+    return animation
+  }
+
 export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {

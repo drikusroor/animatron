@@ -16,6 +16,10 @@ export const schema = gql`
   type Query {
     animations: [Animation!]! @requireAuth
     animation(id: Int!): Animation @requireAuth
+    animationByHistoryUuidAndVersion(
+      animationHistoryUuid: String!
+      version: Int!
+    ): Animation @requireAuth
   }
 
   input CreateAnimationInput {
