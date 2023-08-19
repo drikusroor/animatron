@@ -43,10 +43,6 @@ export const animationByHistoryUuidAndVersion: QueryResolvers['animationByHistor
         version,
         animationHistoryId: animationHistory?.id,
       },
-      include: {
-        tracks: true,
-        entities: true,
-      },
     })
 
     if (!animation) {
