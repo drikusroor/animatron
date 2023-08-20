@@ -138,7 +138,7 @@ export const Success = (
         toast.success('Animation updated')
         navigate(
           routes.animation({
-            animationHistoryUuid: createAnimation.animationHistoryId.toString(),
+            animationHistoryId: createAnimation.animationHistoryId.toString(),
             version: createAnimation.version.toString(),
           })
         )
