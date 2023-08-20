@@ -10,6 +10,7 @@ import {
   createNewAnimation,
   createTracksForAnimation,
   getNextVersion,
+  replaceAnimationUuids,
 } from './helpers/create-animation'
 
 export const animations: QueryResolvers['animations'] = () => {
@@ -57,6 +58,7 @@ export const animationByHistoryUuidAndVersion: QueryResolvers['animationByHistor
 export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {
+  input = replaceAnimationUuids(input)
   const { tracks, entities, ...animationInput } = input
 
   const version = await getNextVersion(input.animationHistoryId)

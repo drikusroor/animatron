@@ -8655,6 +8655,7 @@ __metadata:
   dependencies:
     "@redwoodjs/api": 6.1.0
     "@redwoodjs/graphql-server": 6.1.0
+    uuid: ^9.0.0
   languageName: unknown
   linkType: soft
 
