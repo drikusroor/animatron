@@ -48,7 +48,7 @@ export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryI
 
     if (!animation) {
       throw new Error(
-        `No animation found with version: ${version} for animation history: ${animationHistoryId} / ${animationHistory?.id}`
+        `No animation found with version: ${version} for animation history: ${animationHistoryId}`
       )
     }
 

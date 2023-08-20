@@ -8,7 +8,7 @@ import {
   createAnimation,
   updateAnimation,
   deleteAnimation,
-  animationByHistoryUuidAndVersion,
+  animationByHistoryIdAndVersion,
 } from './animations'
 import type { StandardScenario } from './animations.scenarios'
 
@@ -41,7 +41,7 @@ describe('animations', () => {
           })
           const { id } = history
 
-          const result = await animationByHistoryUuidAndVersion({
+          const result = await animationByHistoryIdAndVersion({
             animationHistoryId: id,
             version: animation.version,
           })

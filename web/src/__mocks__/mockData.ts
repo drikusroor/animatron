@@ -34,6 +34,9 @@ export function createClip(overrides?: Partial<IClip>): IClip {
 export const track: ITrack = {
   id: 1,
   name: 'Track 1',
+  sortNumber: 0,
+  createdAt: '2020-01-01T00:00:00.000Z',
+  updatedAt: '2020-01-01T00:00:00.000Z',
   clips: [createClip(), createClip()],
 }
 
@@ -67,7 +70,7 @@ export const animation: IAnimation = {
   id: 1,
   name: 'Animation 1',
   description: 'Animation 1 description',
-  animationHistoryId: 1,
+  animationHistoryId: 'a98c89a0-9b1a-11eb-a8b3-0242ac130003',
   version: 1,
   createdAt: '2020-01-01T00:00:00.000Z',
   updatedAt: '2020-01-01T00:00:00.000Z',

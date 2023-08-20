@@ -41,14 +41,14 @@ describe('animationHistories', () => {
   scenario('creates a animationHistory', async () => {
     const result = await createAnimationHistory({
       input: {
+        id: 'e4d5f0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0b',
         name: 'String',
-        uuid: 'String5257618',
         updatedAt: '2023-08-12T22:04:16.421Z',
       },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.uuid).toEqual('String5257618')
+    expect(result.id).toEqual('e4d5f0b0-0b1a-4b0e-9b0a-9b0a9b0a9b0b')
     expect(result.updatedAt).toEqual(new Date('2023-08-12T22:04:16.421Z'))
   })
 
