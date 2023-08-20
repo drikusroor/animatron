@@ -59,10 +59,9 @@ export default async () => {
 
     const animationHistories = [
       {
-        id: 1,
+        id: 'a98c89a0-9b1a-11eb-a8b3-0242ac130003',
         name: 'Animation 1',
         description: 'This is animation 1',
-        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
       },
     ]
 
@@ -78,7 +77,7 @@ export default async () => {
         name: 'Animation 1',
         description: 'This is animation 1',
         uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130003',
-        animationHistoryId: 1,
+        animationHistoryId: 'a98c89a0-9b1a-11eb-a8b3-0242ac130003',
         version: 1,
         createdAt: '2021-04-10T00:00:00.000Z',
         updatedAt: '2021-04-10T00:00:00.000Z',

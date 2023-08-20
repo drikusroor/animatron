@@ -23,19 +23,19 @@ export const animation: QueryResolvers['animation'] = ({ id }) => {
   })
 }
 
-export const animationByHistoryUuidAndVersion: QueryResolvers['animationByHistoryUuidAndVersion'] =
+export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryIdAndVersion'] =
   async (input) => {
-    const { animationHistoryUuid, version } = input
+    const { animationHistoryId, version } = input
 
     const animationHistory = await db.animationHistory.findFirst({
       where: {
-        uuid: animationHistoryUuid,
+        id: animationHistoryId,
       },
     })
 
     if (!animationHistory) {
       throw new Error(
-        `No animation history found with uuid: ${animationHistoryUuid}`
+        `No animation history found with uuid: ${animationHistoryId}`
       )
     }
 
@@ -48,7 +48,7 @@ export const animationByHistoryUuidAndVersion: QueryResolvers['animationByHistor
 
     if (!animation) {
       throw new Error(
-        `No animation found with version: ${version} for animation history: ${animationHistoryUuid} / ${animationHistory?.id}`
+        `No animation found with version: ${version} for animation history: ${animationHistoryId} / ${animationHistory?.id}`
       )
     }
 

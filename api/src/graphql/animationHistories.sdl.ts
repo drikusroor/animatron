@@ -1,9 +1,8 @@
 export const schema = gql`
   type AnimationHistory {
-    id: Int!
+    id: String!
     name: String!
     description: String
-    uuid: String!
     revisions: [Animation]!
     currentRevisionId: Int
     createdAt: DateTime!

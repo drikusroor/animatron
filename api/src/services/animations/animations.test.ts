@@ -39,10 +39,10 @@ describe('animations', () => {
           const history = await animationHistory({
             id: animation.animationHistoryId,
           })
-          const { uuid } = history
+          const { id } = history
 
           const result = await animationByHistoryUuidAndVersion({
-            animationHistoryUuid: uuid,
+            animationHistoryId: id,
             version: animation.version,
           })
 
