@@ -10,6 +10,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { useBoundStore } from 'src/store'
+import { IAnimation } from 'src/types/animation.interface'
 
 import AnimationEditor from '../AnimationEditor/AnimationEditor'
 
@@ -133,9 +134,14 @@ export const Success = (
   const [updateAnimation, { loading, error }] = useMutation(
     UPDATE_ANIMATION_MUTATION,
     {
-      onCompleted: () => {
+      onCompleted: ({ createAnimation }: { createAnimation: IAnimation }) => {
         toast.success('Animation updated')
-        navigate(routes.animation())
+        navigate(
+          routes.animation({
+            animationHistoryUuid: createAnimation.animationHistoryId.toString(),
+            version: createAnimation.version.toString(),
+          })
+        )
       },
       onError: (error) => {
         toast.error(error.message)
