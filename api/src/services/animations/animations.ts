@@ -27,10 +27,8 @@ export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryI
   async (input) => {
     const { animationHistoryId, version } = input
 
-    const animationHistory = await db.animationHistory.findFirst({
-      where: {
-        id: animationHistoryId,
-      },
+    const animationHistory = await db.animationHistory.findUnique({
+      where: { id: animationHistoryId },
     })
 
     if (!animationHistory) {
@@ -48,7 +46,7 @@ export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryI
 
     if (!animation) {
       throw new Error(
-        `No animation found with version: ${version} for animation history: ${animationHistoryId}`
+        `Nox animation found with version: ${version} for animation history: ${animationHistoryId}`
       )
     }
 

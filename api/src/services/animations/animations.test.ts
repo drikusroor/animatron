@@ -1,6 +1,6 @@
 import type { Animation } from '@prisma/client'
 
-import { animationHistory } from '../animationHistories/animationHistories'
+import { animationHistories } from '../animationHistories/animationHistories'
 
 import {
   animations,
@@ -34,17 +34,16 @@ describe('animations', () => {
   scenario(
     'returns a single animation by history uuid and version',
     async (scenario: StandardScenario) => {
-      ;[scenario.animation.one, scenario.animation.two].forEach(
-        async (animation) => {
-          const created = await createAnimation()
-
+      const scenarios = [scenario.animation.one, scenario.animation.two]
+      await Promise.all(
+        scenarios.map(async (animation) => {
           const result = await animationByHistoryIdAndVersion({
-            animationHistoryId: created.animationHistoryId,
-            version: created.version,
+            animationHistoryId: animation.animationHistoryId,
+            version: animation.version,
           })
 
           expect(result).toEqual(animation)
-        }
+        })
       )
     }
   )
@@ -111,7 +110,10 @@ describe('animations', () => {
     })) as Animation
     const result = await updateAnimation({
       id: original.id,
-      input: { name: 'String2' },
+      input: {
+        name: 'String2',
+        animationHistoryId: original.animationHistoryId,
+      },
     })
 
     expect(result.name).toEqual('String2')
