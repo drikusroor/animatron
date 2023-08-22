@@ -36,14 +36,11 @@ describe('animations', () => {
     async (scenario: StandardScenario) => {
       ;[scenario.animation.one, scenario.animation.two].forEach(
         async (animation) => {
-          const history = await animationHistory({
-            id: animation.animationHistoryId,
-          })
-          const { id } = history
+          const created = await createAnimation()
 
           const result = await animationByHistoryIdAndVersion({
-            animationHistoryId: id,
-            version: animation.version,
+            animationHistoryId: created.animationHistoryId,
+            version: created.version,
           })
 
           expect(result).toEqual(animation)
