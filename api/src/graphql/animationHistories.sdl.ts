@@ -12,7 +12,7 @@ export const schema = gql`
 
   type Query {
     animationHistories: [AnimationHistory!]! @requireAuth
-    animationHistory(id: Int!): AnimationHistory @requireAuth
+    animationHistory(id: String!): AnimationHistory @requireAuth
   }
 
   input CreateAnimationHistoryInput {
