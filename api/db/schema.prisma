@@ -18,10 +18,9 @@ model UserExample {
 }
 
 model AnimationHistory {
-  id                Int         @id @default(autoincrement())
+  id                String      @id @unique @default(uuid())
   name              String
   description       String?
-  uuid              String      @unique
   revisions         Animation[] @relation("revisions")
   currentRevisionId Int?
   createdAt         DateTime    @default(now())
@@ -34,7 +33,7 @@ model Animation {
   name               String
   description        String?
   uuid               String            @unique @default(uuid())
-  animationHistoryId Int
+  animationHistoryId String
   AnimationHistory   AnimationHistory  @relation("revisions", fields: [animationHistoryId], references: [id])
   version            Int
   createdAt          DateTime          @default(now())

@@ -1,9 +1,8 @@
 export const schema = gql`
   type AnimationHistory {
-    id: Int!
+    id: String!
     name: String!
     description: String
-    uuid: String!
     revisions: [Animation]!
     currentRevisionId: Int
     createdAt: DateTime!
@@ -13,7 +12,7 @@ export const schema = gql`
 
   type Query {
     animationHistories: [AnimationHistory!]! @requireAuth
-    animationHistory(id: Int!): AnimationHistory @requireAuth
+    animationHistory(id: String!): AnimationHistory @requireAuth
   }
 
   input CreateAnimationHistoryInput {
@@ -37,7 +36,7 @@ export const schema = gql`
       input: CreateAnimationHistoryInput!
     ): AnimationHistory! @requireAuth
     updateAnimationHistory(
-      id: Int!
+      id: String!
       input: UpdateAnimationHistoryInput!
     ): AnimationHistory! @requireAuth
     deleteAnimationHistory(id: Int!): AnimationHistory! @requireAuth

@@ -4,7 +4,7 @@ export const schema = gql`
     name: String!
     description: String
     uuid: String!
-    animationHistoryId: Int!
+    animationHistoryId: String!
     AnimationHistory: AnimationHistory!
     version: Int!
     createdAt: DateTime!
@@ -16,13 +16,17 @@ export const schema = gql`
   type Query {
     animations: [Animation!]! @requireAuth
     animation(id: Int!): Animation @requireAuth
+    animationByHistoryIdAndVersion(
+      animationHistoryId: String!
+      version: Int!
+    ): Animation @requireAuth
   }
 
   input CreateAnimationInput {
     name: String!
     description: String
     uuid: String
-    animationHistoryId: Int!
+    animationHistoryId: String!
     version: Int!
     tracks: [CreateAnimationTrackInput!]
     entities: [CreateAnimationEntityInput!]
@@ -32,7 +36,7 @@ export const schema = gql`
     name: String
     description: String
     uuid: String
-    animationHistoryId: Int
+    animationHistoryId: String!
     version: Int
   }
 

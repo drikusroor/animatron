@@ -19,7 +19,7 @@ export const standard = defineScenario<Prisma.AnimationEntityCreateArgs>({
             AnimationHistory: {
               create: {
                 name: 'String',
-                uuid: 'String3895931',
+                id: 'e8d7f0b0-0b1a-123e-9b0a-5b0a9b0a9b0b',
                 updatedAt: '2023-08-12T22:04:34.660Z',
               },
             },
@@ -42,7 +42,7 @@ export const standard = defineScenario<Prisma.AnimationEntityCreateArgs>({
             AnimationHistory: {
               create: {
                 name: 'String',
-                uuid: 'String2042120',
+                id: 'e8d7f0b0-0b1a-123f-9b0a-6b0a9b0a9b0b',
                 updatedAt: '2023-08-12T22:04:34.660Z',
               },
             },

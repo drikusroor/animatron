@@ -10,7 +10,7 @@ export interface IAnimation {
   id: number
   name: string
   description?: string
-  animationHistoryId: number
+  animationHistoryId: string
   version: number
   createdAt: string
   updatedAt: string

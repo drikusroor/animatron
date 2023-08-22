@@ -10,6 +10,7 @@ import {
   createNewAnimation,
   createTracksForAnimation,
   getNextVersion,
+  replaceAnimationUuids,
 } from './helpers/create-animation'
 
 export const animations: QueryResolvers['animations'] = () => {
@@ -22,9 +23,40 @@ export const animation: QueryResolvers['animation'] = ({ id }) => {
   })
 }
 
+export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryIdAndVersion'] =
+  async (input) => {
+    const { animationHistoryId, version } = input
+
+    const animationHistory = await db.animationHistory.findUnique({
+      where: { id: animationHistoryId },
+    })
+
+    if (!animationHistory) {
+      throw new Error(
+        `No animation history found with uuid: ${animationHistoryId}`
+      )
+    }
+
+    const animation = await db.animation.findFirst({
+      where: {
+        version,
+        animationHistoryId: animationHistory?.id,
+      },
+    })
+
+    if (!animation) {
+      throw new Error(
+        `Nox animation found with version: ${version} for animation history: ${animationHistoryId}`
+      )
+    }
+
+    return animation
+  }
+
 export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {
+  input = replaceAnimationUuids(input)
   const { tracks, entities, ...animationInput } = input
 
   const version = await getNextVersion(input.animationHistoryId)

@@ -19,8 +19,8 @@ export const standard = defineScenario<Prisma.AnimationTrackClipCreateArgs>({
                 updatedAt: '2023-08-12T22:04:43.136Z',
                 AnimationHistory: {
                   create: {
+                    id: 'e8d7f0b0-0b1a-4b0e-9b0a-3b0a9b0a9b0a',
                     name: 'String',
-                    uuid: 'String6897591',
                     updatedAt: '2023-08-12T22:04:43.136Z',
                   },
                 },
@@ -42,8 +42,8 @@ export const standard = defineScenario<Prisma.AnimationTrackClipCreateArgs>({
                 updatedAt: '2023-08-12T22:04:43.136Z',
                 AnimationHistory: {
                   create: {
+                    id: 'e8d7f0b0-0b1a-4b0e-9b0a-4b0a9b0a9b0b',
                     name: 'String',
-                    uuid: 'String4749407',
                     updatedAt: '2023-08-12T22:04:43.137Z',
                   },
                 },
@@ -68,8 +68,8 @@ export const standard = defineScenario<Prisma.AnimationTrackClipCreateArgs>({
                 updatedAt: '2023-08-12T22:04:43.137Z',
                 AnimationHistory: {
                   create: {
+                    id: 'e8d7f0b0-0b1a-4b0e-9b0a-5b0a9b0a9b0a',
                     name: 'String',
-                    uuid: 'String3860053',
                     updatedAt: '2023-08-12T22:04:43.137Z',
                   },
                 },
@@ -91,8 +91,8 @@ export const standard = defineScenario<Prisma.AnimationTrackClipCreateArgs>({
                 updatedAt: '2023-08-12T22:04:43.137Z',
                 AnimationHistory: {
                   create: {
+                    id: 'e8d7f0b0-0b1a-4b0e-9b0a-6b0a9b0a9b0b',
                     name: 'String',
-                    uuid: 'String7037791',
                     updatedAt: '2023-08-12T22:04:43.137Z',
                   },
                 },

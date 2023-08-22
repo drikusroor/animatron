@@ -1,11 +1,14 @@
 import type { Animation } from '@prisma/client'
 
+import { animationHistories } from '../animationHistories/animationHistories'
+
 import {
   animations,
   animation,
   createAnimation,
   updateAnimation,
   deleteAnimation,
+  animationByHistoryIdAndVersion,
 } from './animations'
 import type { StandardScenario } from './animations.scenarios'
 
@@ -27,6 +30,23 @@ describe('animations', () => {
 
     expect(result).toEqual(scenario.animation.one)
   })
+
+  scenario(
+    'returns a single animation by history uuid and version',
+    async (scenario: StandardScenario) => {
+      const scenarios = [scenario.animation.one, scenario.animation.two]
+      await Promise.all(
+        scenarios.map(async (animation) => {
+          const result = await animationByHistoryIdAndVersion({
+            animationHistoryId: animation.animationHistoryId,
+            version: animation.version,
+          })
+
+          expect(result).toEqual(animation)
+        })
+      )
+    }
+  )
 
   scenario('creates a animation', async (scenario: StandardScenario) => {
     const result = await createAnimation({
@@ -90,7 +110,10 @@ describe('animations', () => {
     })) as Animation
     const result = await updateAnimation({
       id: original.id,
-      input: { name: 'String2' },
+      input: {
+        name: 'String2',
+        animationHistoryId: original.animationHistoryId,
+      },
     })
 
     expect(result.name).toEqual('String2')

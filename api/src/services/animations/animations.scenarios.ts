@@ -1,4 +1,5 @@
 import type { Prisma, Animation } from '@prisma/client'
+import { v4 as uuidv4 } from 'uuid'
 
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
@@ -11,9 +12,8 @@ export const standard = defineScenario<Prisma.AnimationCreateArgs>({
         updatedAt: '2023-08-12T22:03:56.314Z',
         AnimationHistory: {
           create: {
-            name: 'String',
-            uuid: 'String2450868',
-            updatedAt: '2023-08-12T22:03:56.314Z',
+            id: uuidv4(),
+            name: 'History 1',
           },
         },
       },
@@ -25,9 +25,8 @@ export const standard = defineScenario<Prisma.AnimationCreateArgs>({
         updatedAt: '2023-08-12T22:03:56.314Z',
         AnimationHistory: {
           create: {
-            name: 'String',
-            uuid: 'String25455',
-            updatedAt: '2023-08-12T22:03:56.314Z',
+            id: uuidv4(),
+            name: 'History 2',
           },
         },
       },
