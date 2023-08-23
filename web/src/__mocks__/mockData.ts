@@ -1,4 +1,4 @@
-import { IAnimation } from 'src/types/animation.interface'
+import { IAnimation, IAnimationAggregated } from 'src/types/animation.interface'
 import { IClip } from 'src/types/clip.interface'
 import { IEntity } from 'src/types/entity.interface'
 import { IKeyframe } from 'src/types/keyframe.interface'
@@ -79,6 +79,17 @@ export const animation: IAnimation = {
 export function createAnimation(overrides?: Partial<IAnimation>): IAnimation {
   return {
     ...animation,
+    ...overrides,
+  }
+}
+
+export function createAnimationAggregated(
+  overrides?: Partial<IAnimationAggregated>
+): IAnimationAggregated {
+  return {
+    ...animation,
+    entities: [],
+    tracks: [],
     ...overrides,
   }
 }

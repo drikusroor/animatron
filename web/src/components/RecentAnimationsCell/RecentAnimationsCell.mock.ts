@@ -1,19 +1,40 @@
-import { createAnimation } from 'src/__mocks__/mockData'
+import { createAnimationAggregated, createEntity } from 'src/__mocks__/mockData'
 
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
   recentAnimations: [
     {
       id: 42,
-      revisions: [createAnimation(), createAnimation()],
+      revisions: [
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+      ],
     },
     {
       id: 43,
-      revisions: [createAnimation(), createAnimation()],
+      revisions: [
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+      ],
     },
     {
       id: 44,
-      revisions: [createAnimation(), createAnimation()],
+      revisions: [
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+        createAnimationAggregated({
+          entities: [createEntity(), createEntity()],
+        }),
+      ],
     },
   ],
 })
