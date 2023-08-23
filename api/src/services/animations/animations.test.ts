@@ -1,7 +1,5 @@
 import type { Animation } from '@prisma/client'
 
-import { animationHistories } from '../animationHistories/animationHistories'
-
 import {
   animations,
   animation,
