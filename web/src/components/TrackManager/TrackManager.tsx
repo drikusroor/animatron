@@ -39,9 +39,9 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
 
   return (
     <div className="flex flex-row">
-      <div className="relative bg-slate-700">
+      <div className="relative bg-gray-700">
         <div
-          className={`absolute -right-4 top-0 z-10 h-full w-4 bg-gradient-to-r from-slate-900 transition-opacity
+          className={`absolute -right-4 top-0 z-10 h-full w-4 bg-gradient-to-r from-gray-900 transition-opacity
           ${showShadow ? 'opacity-25' : 'opacity-0'}`}
         />
         {tracks.map((track, index) => (
@@ -56,7 +56,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
         ))}
       </div>
       <div className="group relative w-full">
-        <div className="overflow-x-auto bg-slate-800" ref={scrollRef}>
+        <div className="overflow-x-auto bg-gray-800" ref={scrollRef}>
           {tracks.map((track, index) => (
             <Track
               key={index}
@@ -71,7 +71,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
         </div>
         <div className="absolute right-2 top-2 z-10 flex flex-row items-center justify-center gap-1">
           <button
-            className="rounded-full p-2 opacity-10 transition hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg group-hover:opacity-100"
+            className="rounded-full p-2 opacity-10 transition hover:bg-gray-600 hover:text-gray-100 hover:shadow-lg group-hover:opacity-100"
             title="Zoom in"
             aria-label="Zoom in"
             onClick={() => setZoom(zoom * 2)}
@@ -80,7 +80,7 @@ const TrackManager = ({ tracks, trackHeight = 32 }: ITrackManagerProps) => {
           </button>
 
           <button
-            className="rounded-full p-2 opacity-10 transition hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg group-hover:opacity-100"
+            className="rounded-full p-2 opacity-10 transition hover:bg-gray-600 hover:text-gray-100 hover:shadow-lg group-hover:opacity-100"
             title="Zoom out"
             aria-label="Zoom out"
             onClick={() => setZoom(zoom / 2)}
