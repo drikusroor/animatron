@@ -18,14 +18,14 @@ model UserExample {
 }
 
 model AnimationHistory {
-  id                String      @id @unique @default(uuid())
-  name              String
-  description       String?
-  revisions         Animation[] @relation("revisions")
-  currentRevisionId Int?
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
-  forkedFromId      Int?
+  id                  String      @id @unique @default(uuid())
+  name                String
+  description         String?
+  revisions           Animation[] @relation("revisions")
+  currentRevisionId   Int?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  forkedFromHistoryId String?
 }
 
 model Animation {
