@@ -6,6 +6,8 @@ import type {
 
 import { db } from 'src/lib/db'
 
+import { createAnimationHistory } from '../animationHistories/animationHistories'
+
 import {
   createNewAnimation,
   createTracksForAnimation,
@@ -85,10 +87,29 @@ export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryI
 export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {
+  // Replace the uuids in the input with new uuids to avoid collisions
   input = replaceAnimationUuids(input)
   const { tracks, entities, ...animationInput } = input
 
-  const version = await getNextVersion(input.animationHistoryId)
+  // Get the next version for the animation
+  let version = await getNextVersion(input.animationHistoryId)
+
+  /**
+   * If the animation history is not the latest version, fork it
+   */
+  if (version - input.version !== 1) {
+    const newAnimationHistory = await createAnimationHistory({
+      input: {
+        forkedFromHistoryId: input.animationHistoryId,
+        name: `${input.name} (forked)`,
+        description: input.description,
+      },
+    })
+
+    animationInput.animationHistoryId = newAnimationHistory.id
+    version = 1
+  }
+
   const createdAnimation = await createNewAnimation(
     animationInput,
     entities,
