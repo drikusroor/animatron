@@ -6,6 +6,8 @@ import type {
 
 import { db } from 'src/lib/db'
 
+import { createAnimationHistory } from '../animationHistories/animationHistories'
+
 import {
   createNewAnimation,
   createTracksForAnimation,
@@ -89,6 +91,19 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
   const { tracks, entities, ...animationInput } = input
 
   const version = await getNextVersion(input.animationHistoryId)
+
+  if (version - input.version !== 1) {
+    const newAnimationHistory = await createAnimationHistory({
+      input: {
+        forkedFromHistoryId: input.animationHistoryId,
+        name: `${input.name} (forked)`,
+        description: input.description,
+      },
+    })
+
+    animationInput.animationHistoryId = newAnimationHistory.id
+  }
+
   const createdAnimation = await createNewAnimation(
     animationInput,
     entities,
