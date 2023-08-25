@@ -15,11 +15,23 @@ export const schema = gql`
 
   type Query {
     animations: [Animation!]! @requireAuth
+    recentAnimations(
+      groupBy: String
+      orderBy: String
+      orderDirection: OrderDirection
+      first: Int
+      skip: Int
+    ): [Animation!]! @requireAuth
     animation(id: Int!): Animation @requireAuth
     animationByHistoryIdAndVersion(
       animationHistoryId: String!
       version: Int!
     ): Animation @requireAuth
+  }
+
+  enum OrderDirection {
+    ASC
+    DESC
   }
 
   input CreateAnimationInput {

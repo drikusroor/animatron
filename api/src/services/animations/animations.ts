@@ -17,6 +17,35 @@ export const animations: QueryResolvers['animations'] = () => {
   return db.animation.findMany()
 }
 
+export const recentAnimations: QueryResolvers['animations'] = async () => {
+  const recentRevisionIds = (
+    await db.$queryRaw<{ id: number }[]>`
+    WITH LatestAnimations AS (
+        SELECT animationHistoryId, MAX(version) as maxVersion
+        FROM Animation
+        GROUP BY animationHistoryId
+    )
+    SELECT a.id
+    FROM Animation a
+    JOIN LatestAnimations la ON a.animationHistoryId = la.animationHistoryId AND a.version = la.maxVersion
+    ORDER BY a.createdAt DESC
+`
+  ).map(({ id }) => id)
+
+  const animations = await db.animation.findMany({
+    where: {
+      id: {
+        in: recentRevisionIds,
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return animations
+}
+
 export const animation: QueryResolvers['animation'] = ({ id }) => {
   return db.animation.findUnique({
     where: { id },

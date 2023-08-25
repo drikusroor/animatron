@@ -60,8 +60,13 @@ export default async () => {
     const animationHistories = [
       {
         id: 'a98c89a0-9b1a-11eb-a8b3-0242ac130003',
-        name: 'Animation 1',
-        description: 'This is animation 1',
+        name: 'Animation History 1',
+        description: 'This is animation history 1',
+      },
+      {
+        id: 'a98c89a0-9b1a-11eb-a8b3-0242ac130004',
+        name: 'Animation History 2',
+        description: 'This is animation history 2',
       },
     ]
 
@@ -81,6 +86,36 @@ export default async () => {
         version: 1,
         createdAt: '2021-04-10T00:00:00.000Z',
         updatedAt: '2021-04-10T00:00:00.000Z',
+      },
+      {
+        id: 2,
+        name: 'Animation 2',
+        description: 'This is animation 2',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130004',
+        animationHistoryId: 'a98c89a0-9b1a-11eb-a8b3-0242ac130003',
+        version: 2,
+        createdAt: '2021-04-10T00:00:00.000Z',
+        updatedAt: '2021-04-10T00:00:00.000Z',
+      },
+      {
+        id: 3,
+        name: 'Animation 3',
+        description: 'This is animation 3',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130005',
+        animationHistoryId: 'a98c89a0-9b1a-11eb-a8b3-0242ac130004',
+        version: 1,
+        createdAt: '2023-04-10T00:00:00.000Z',
+        updatedAt: '2023-04-10T00:00:00.000Z',
+      },
+      {
+        id: 4,
+        name: 'Animation 4',
+        description: 'This is animation 4',
+        uuid: 'f1b9c9a0-9b1a-11eb-a8b3-0242ac130006',
+        animationHistoryId: 'a98c89a0-9b1a-11eb-a8b3-0242ac130004',
+        version: 2,
+        createdAt: '2023-07-10T00:00:00.000Z',
+        updatedAt: '2023-07-10T00:00:00.000Z',
       },
     ]
 

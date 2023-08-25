@@ -1,7 +1,7 @@
-import { IEntity } from 'src/types/entity.interface'
+import { IEntityVisualData } from 'src/types/entity.interface'
 
 interface IEntityRendererProps {
-  entity: IEntity
+  entity: IEntityVisualData
   maxWidth?: number
   maxHeight?: number
 }
@@ -11,6 +11,10 @@ const EntityRenderer = ({
   maxHeight,
   maxWidth,
 }: IEntityRendererProps) => {
+  if (!entity) {
+    return <div className="h-full w-full bg-gray-200"></div>
+  }
+
   function parseStyle(cssString: string) {
     // Remove the curly braces and trim the string
     const cleanedString = cssString.replace(/[\{\}]/g, '').trim()
@@ -43,7 +47,7 @@ const EntityRenderer = ({
     return styleObject
   }
 
-  if (entity.image) {
+  if (entity?.image) {
     return (
       <img
         data-testid="entity-image"

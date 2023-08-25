@@ -18,9 +18,9 @@ const Routes = () => {
       <Set wrap={AppLayout}>
         <Route path="/app" page={AppPage} name="app" />
         <Route path="/animation/{animationHistoryId}/{version}" page={AnimationViewerPage} name="animation" />
+        <Route path="/" page={FrontPage} name="front" />
       </Set>
       <Set wrap={BlogLayout}>
-        <Route path="/" page={FrontPage} name="front" />
         <Route notfound page={NotFoundPage} />
       </Set>
     </Router>
