@@ -18,7 +18,6 @@ export const schema = gql`
   input CreateAnimationHistoryInput {
     name: String!
     description: String
-    uuid: String!
     currentRevisionId: Int
     forkedFromHistoryId: String
   }
@@ -26,7 +25,6 @@ export const schema = gql`
   input UpdateAnimationHistoryInput {
     name: String
     description: String
-    uuid: String
     currentRevisionId: Int
     forkedFromHistoryId: String
   }
