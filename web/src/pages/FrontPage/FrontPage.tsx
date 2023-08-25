@@ -19,12 +19,12 @@ const FrontPage = () => {
 
             <a href="/app" className="mt-4 inline-block">
               <button
-                className="rounded bg-slate-600 px-4 py-2 font-bold text-white hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded bg-gray-600 px-4 py-2 text-white hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Start animating is not implemented yet"
                 aria-label="Start animating is not implemented yet"
                 disabled
               >
-                Start animating
+                Start animating 💪
               </button>
             </a>
           </div>

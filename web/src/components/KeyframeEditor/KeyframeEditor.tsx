@@ -44,7 +44,7 @@ const KeyframeEditor = ({
         <div className="flex flex-col">
           <label htmlFor="css">CSS</label>
           <textarea
-            className="mt-1 bg-slate-700"
+            className="mt-1 bg-gray-700"
             id="css"
             name="css"
             rows={10}
@@ -59,7 +59,7 @@ const KeyframeEditor = ({
           <label htmlFor="css">Duration</label>
           <input
             type="number"
-            className="mt-1 bg-slate-700 p-2"
+            className="mt-1 bg-gray-700 p-2"
             id="duration"
             name="duration"
             value={keyframe.duration}

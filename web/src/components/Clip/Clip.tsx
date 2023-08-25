@@ -27,10 +27,10 @@ const Clip = ({ clip, path, select, selection, zoom }: IClipProps) => {
 
   return (
     <div
-      className={`absolute -ml-3 mt-2 flex cursor-pointer flex-row rounded-2xl bg-slate-700 p-2 pl-3 transition-all hover:bg-slate-600
+      className={`absolute -ml-3 mt-2 flex cursor-pointer flex-row rounded-2xl bg-gray-700 p-2 pl-3 transition-all hover:bg-gray-600
       ${
         isSelected(selection, { path, type: 'clip' })
-          ? 'border border-slate-500'
+          ? 'border border-gray-500'
           : ''
       }`}
       style={{

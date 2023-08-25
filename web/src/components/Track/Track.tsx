@@ -30,7 +30,7 @@ const Track = ({
       style={{ ...backgroundColorStyle, ...heightStyle }}
       className="w-full pl-3"
     >
-      <div className="relative flex items-center border-l border-slate-400 py-3">
+      <div className="relative flex items-center border-l border-gray-400 py-3">
         {track.clips.map((clip, index) => (
           <Clip
             key={index}

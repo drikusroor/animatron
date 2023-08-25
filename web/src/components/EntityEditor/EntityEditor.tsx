@@ -55,7 +55,7 @@ const EntityEditor = ({
         <div className="flex flex-col">
           <label htmlFor="html">HTML</label>
           <textarea
-            className="mt-1 bg-slate-700"
+            className="mt-1 bg-gray-700"
             id="html"
             name="html"
             rows={10}
@@ -68,7 +68,7 @@ const EntityEditor = ({
         <div className="flex flex-col">
           <label htmlFor="css">CSS</label>
           <textarea
-            className="mt-1 bg-slate-700"
+            className="mt-1 bg-gray-700"
             id="css"
             name="css"
             rows={10}
@@ -81,7 +81,7 @@ const EntityEditor = ({
           <label htmlFor="name">Name</label>
           <input
             type="text"
-            className="mt-1 bg-slate-700"
+            className="mt-1 bg-gray-700"
             id="name"
             name="name"
             value={entity.name}
@@ -91,7 +91,7 @@ const EntityEditor = ({
         <div className="flex flex-col">
           <label htmlFor="image">Image</label>
           <input
-            className="mt-1 bg-slate-700"
+            className="mt-1 bg-gray-700"
             id="image"
             name="image"
             type="text"

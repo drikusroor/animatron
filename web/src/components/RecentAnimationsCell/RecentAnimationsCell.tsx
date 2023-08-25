@@ -61,8 +61,10 @@ export const Success = ({
   }
 
   return (
-    <ul className="w-full rounded-lg bg-slate-600 p-2">
-      <li className="mb-2 text-lg font-bold text-white">Inspopirations</li>
+    <ul className="flex w-full flex-col gap-2 rounded-lg bg-gray-700 p-2">
+      <li className="text-md mb-2 text-white">
+        Recent animations for inspopiration 🧠
+      </li>
       {recentAnimations.map((item) => {
         const entity = item.entities[0]
 
