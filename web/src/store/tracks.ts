@@ -7,7 +7,7 @@ import { IRootState } from '.'
 
 export interface ITracksState {
   tracks: ITrack[]
-  addTrack: (track: ITrack) => void
+  addTrack: (track?: ITrack) => void
   removeTrack: (track: ITrack) => void
   updateTrack: (track: ITrack) => void
   updateKeyframe: (keyframe: IKeyframe, path?: number[]) => void
@@ -20,10 +20,19 @@ const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
   _y
 ) => ({
   tracks: [],
-  addTrack: (track: ITrack) =>
-    set((state) => ({
-      tracks: [...state.tracks, track],
-    })),
+  addTrack: (input: Partial<ITrack> = {}) =>
+    set((state) => {
+      const track = {
+        name: 'New Track',
+        clips: [],
+        sortNumber: get().tracks.length + 1,
+        ...input,
+      }
+
+      return {
+        tracks: [...state.tracks, track],
+      }
+    }),
   removeTrack: (track: ITrack) =>
     set((state) => {
       const indexOf = state.tracks.indexOf(track)

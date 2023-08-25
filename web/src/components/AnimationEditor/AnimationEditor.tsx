@@ -22,7 +22,7 @@ interface AnimationEditorProps {
   loading: boolean
 }
 
-const AnimationEditor = ({ onSave, tracks }: AnimationEditorProps) => {
+const AnimationEditor = ({ onSave }: AnimationEditorProps) => {
   const selection = useBoundStore((state) => state.selection)
   const select = useBoundStore((state) => state.select)
 
@@ -64,7 +64,7 @@ const AnimationEditor = ({ onSave, tracks }: AnimationEditorProps) => {
       <div className="flex h-screen w-full flex-col justify-end border-e">
         <EntityEditorContainer />
         <KeyframeEditorContainer />
-        <TrackManager tracks={tracks} />
+        <TrackManager />
       </div>
     </div>
   )
