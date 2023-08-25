@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 
+import { FaSave } from 'react-icons/fa'
+
 import { RWGqlError } from '@redwoodjs/forms'
 
 import { useBoundStore } from 'src/store'
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
+import AddNewEntityContainer from '../AddNewEntityContainer/AddNewEntityContainer'
 import EntityEditorContainer from '../EntityEditorContainer/EntityEditorContainer'
 import EntityListContainer from '../EntityListContainer/EntityListContainer'
 import KeyframeEditorContainer from '../KeyframeEditorContainer/KeyframeEditorContainer'
@@ -43,15 +46,17 @@ const AnimationEditor = ({ onSave, tracks }: AnimationEditorProps) => {
   return (
     <div className="flex h-screen flex-row">
       <div className="flex h-screen w-64 flex-col justify-between border-e p-2">
-        <div>
+        <div className="flex flex-col gap-2">
           <h2 className="text-sm font-bold uppercase">Entities</h2>
           <EntityListContainer />
+          <AddNewEntityContainer />
         </div>
         <div>
           <button
-            className="w-full rounded-lg bg-amber-400 px-4 py-2 font-bold uppercase text-gray-800 transition-colors duration-200 ease-in-out hover:bg-amber-500"
+            className="flex w-full flex-row items-center gap-2 rounded-lg bg-amber-400 px-4 py-2 font-bold uppercase text-gray-800 transition-colors duration-200 ease-in-out hover:bg-amber-500"
             onClick={onSave}
           >
+            <FaSave />
             Save changes
           </button>
         </div>

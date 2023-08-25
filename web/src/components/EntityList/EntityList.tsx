@@ -28,7 +28,11 @@ const EntityList = (props: IEntityListProps) => {
   }
 
   return (
-    <ul className="mt-3">
+    <ul>
+      {!entities ||
+        (entities.length === 0 && (
+          <span className="text-gray-400">No entities</span>
+        ))}
       {entities.map((entity: IEntity, index) => {
         return (
           <li key={index}>

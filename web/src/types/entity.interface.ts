@@ -10,8 +10,8 @@ export interface IEntityMetadata {
   name: string
   description?: string
   revisionId?: number
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
   uuid?: string
 }
 
