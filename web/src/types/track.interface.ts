@@ -2,15 +2,15 @@ import { IClip, IClipInput, mapClipToClipInput } from './clip.interface'
 
 export interface ITrack {
   __typename?: 'AnimationTrack'
-  id: number
+  id?: number
   name: string
   description?: string
   clips: IClip[]
   color?: string
   height?: number
   sortNumber: number
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export interface ITrackInput {
