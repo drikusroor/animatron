@@ -90,8 +90,11 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input = replaceAnimationUuids(input)
   const { tracks, entities, ...animationInput } = input
 
-  const version = await getNextVersion(input.animationHistoryId)
+  let version = await getNextVersion(input.animationHistoryId)
 
+  /**
+   * If the animation history is not the latest version, fork it
+   */
   if (version - input.version !== 1) {
     const newAnimationHistory = await createAnimationHistory({
       input: {
@@ -102,6 +105,7 @@ export const createAnimation: MutationResolvers['createAnimation'] = async ({
     })
 
     animationInput.animationHistoryId = newAnimationHistory.id
+    version = 1
   }
 
   const createdAnimation = await createNewAnimation(
