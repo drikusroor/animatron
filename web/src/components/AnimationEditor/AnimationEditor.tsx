@@ -6,6 +6,7 @@ import { useBoundStore } from 'src/store'
 import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
+import AddNewEntityContainer from '../AddNewEntityContainer/AddNewEntityContainer'
 import EntityEditorContainer from '../EntityEditorContainer/EntityEditorContainer'
 import EntityListContainer from '../EntityListContainer/EntityListContainer'
 import KeyframeEditorContainer from '../KeyframeEditorContainer/KeyframeEditorContainer'
@@ -46,6 +47,7 @@ const AnimationEditor = ({ onSave, tracks }: AnimationEditorProps) => {
         <div>
           <h2 className="text-sm font-bold uppercase">Entities</h2>
           <EntityListContainer />
+          <AddNewEntityContainer />
         </div>
         <div>
           <button
