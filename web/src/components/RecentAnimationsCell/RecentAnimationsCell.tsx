@@ -8,6 +8,7 @@ export const QUERY = gql`
   query RecentAnimationsQuery {
     recentAnimations {
       id
+      animationHistoryId
       name
       version
       createdAt
@@ -68,8 +69,8 @@ export const Success = ({
         return (
           <li key={item.id}>
             <a
-              href={`/animation/${item.id}/${item.version}`}
-              className="flex items-center justify-between gap-2 rounded-lg bg-slate-500 p-2 transition-colors duration-200 ease-in-out hover:bg-slate-700"
+              href={`/animation/${item.animationHistoryId}/${item.version}`}
+              className="flex items-center justify-between gap-2 rounded-lg bg-gray-600 p-2 transition-colors duration-200 ease-in-out hover:bg-gray-500"
             >
               <div className="flex items-center gap-2">
                 {entity ? (
