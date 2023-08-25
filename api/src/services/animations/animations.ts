@@ -87,9 +87,11 @@ export const animationByHistoryIdAndVersion: QueryResolvers['animationByHistoryI
 export const createAnimation: MutationResolvers['createAnimation'] = async ({
   input,
 }) => {
+  // Replace the uuids in the input with new uuids to avoid collisions
   input = replaceAnimationUuids(input)
   const { tracks, entities, ...animationInput } = input
 
+  // Get the next version for the animation
   let version = await getNextVersion(input.animationHistoryId)
 
   /**
