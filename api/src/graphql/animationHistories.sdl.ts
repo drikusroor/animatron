@@ -37,6 +37,6 @@ export const schema = gql`
       id: String!
       input: UpdateAnimationHistoryInput!
     ): AnimationHistory! @requireAuth
-    deleteAnimationHistory(id: Int!): AnimationHistory! @requireAuth
+    deleteAnimationHistory(id: String!): AnimationHistory! @requireAuth
   }
 `
