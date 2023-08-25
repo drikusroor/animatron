@@ -14,7 +14,8 @@ export const schema = gql`
   }
 
   type Query {
-    animations(
+    animations: [Animation!]! @requireAuth
+    recentAnimations(
       groupBy: String
       orderBy: String
       orderDirection: OrderDirection

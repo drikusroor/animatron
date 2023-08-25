@@ -1,7 +1,7 @@
-import { IEntity } from 'src/types/entity.interface'
+import { IEntityVisualData } from 'src/types/entity.interface'
 
 interface IEntityRendererProps {
-  entity: IEntity
+  entity: IEntityVisualData
   maxWidth?: number
   maxHeight?: number
 }

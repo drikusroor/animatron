@@ -6,21 +6,17 @@ import EntityRenderer from '../EntityRenderer/EntityRenderer'
 
 export const QUERY = gql`
   query RecentAnimationsQuery {
-    recentAnimations: animationHistories {
+    recentAnimations {
       id
       name
+      version
+      createdAt
+      updatedAt
 
-      revisions {
-        id
-        version
-        createdAt
-        updatedAt
-
-        entities {
-          html
-          css
-          image
-        }
+      entities {
+        html
+        css
+        image
       }
     }
   }
@@ -67,23 +63,24 @@ export const Success = ({
     <ul className="w-full rounded-lg bg-slate-600 p-2">
       <li className="mb-2 text-lg font-bold text-white">Inspopirations</li>
       {recentAnimations.map((item) => {
+        const entity = item.entities[0]
+
         return (
           <li key={item.id}>
             <a
-              href={`/animation/${item.id}/${item.revisions[0].version}`}
+              href={`/animation/${item.id}/${item.version}`}
               className="flex items-center justify-between gap-2 rounded-lg bg-slate-500 p-2 transition-colors duration-200 ease-in-out hover:bg-slate-700"
             >
               <div className="flex items-center gap-2">
-                <EntityRenderer
-                  entity={item.revisions[item.revisions.length - 1].entities[0]}
-                />
+                {entity ? (
+                  <EntityRenderer entity={entity} />
+                ) : (
+                  <div className="h-8 w-8 rounded-full bg-gray-400"></div>
+                )}
                 <span className="text-sm text-white">{item.name}</span>
               </div>
               <span className="text-sm text-gray-400">
-                {timeAgo(
-                  new Date(item.revisions[item.revisions.length - 1].updatedAt)
-                )}{' '}
-                ago
+                {timeAgo(new Date(item.updatedAt))} ago
               </span>
             </a>
           </li>

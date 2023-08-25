@@ -1,4 +1,10 @@
-export interface IEntity {
+export interface IEntityVisualData {
+  image: string
+  html: string
+  css: string
+}
+
+export interface IEntityMetadata {
   __typename?: 'AnimationEntity'
   id?: number
   name: string
@@ -6,11 +12,10 @@ export interface IEntity {
   revisionId?: number
   createdAt: string
   updatedAt: string
-  image: string
-  html: string
-  css: string
   uuid?: string
 }
+
+export interface IEntity extends IEntityMetadata, IEntityVisualData {}
 
 export interface IEntityInput {
   name: string
