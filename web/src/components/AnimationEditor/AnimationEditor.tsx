@@ -46,7 +46,7 @@ const AnimationEditor = ({ onSave, tracks }: AnimationEditorProps) => {
   return (
     <div className="flex h-screen flex-row">
       <div className="flex h-screen w-64 flex-col justify-between border-e p-2">
-        <div>
+        <div className="flex flex-col gap-2">
           <h2 className="text-sm font-bold uppercase">Entities</h2>
           <EntityListContainer />
           <AddNewEntityContainer />
