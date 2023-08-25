@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import { FaSearchMinus, FaSearchPlus } from 'react-icons/fa'
 
 import { useBoundStore } from 'src/store'
-import { ITrack } from 'src/types/track.interface'
 
 import AddNewTrackButton from '../AddNewTrackButton/AddNewTrackButton'
 import Track from '../Track/Track'
