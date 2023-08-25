@@ -7,7 +7,7 @@ export const schema = gql`
     currentRevisionId: Int
     createdAt: DateTime!
     updatedAt: DateTime!
-    forkedFromId: Int
+    forkedFromHistoryId: String
   }
 
   type Query {
@@ -20,7 +20,7 @@ export const schema = gql`
     description: String
     uuid: String!
     currentRevisionId: Int
-    forkedFromId: Int
+    forkedFromHistoryId: String
   }
 
   input UpdateAnimationHistoryInput {
@@ -28,7 +28,7 @@ export const schema = gql`
     description: String
     uuid: String
     currentRevisionId: Int
-    forkedFromId: Int
+    forkedFromHistoryId: String
   }
 
   type Mutation {
