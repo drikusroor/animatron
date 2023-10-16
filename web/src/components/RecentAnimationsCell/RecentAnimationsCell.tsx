@@ -23,7 +23,15 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <>
+    {
+      Array.from(Array(3)).map(() =>
+        <li className='rounded bg-slate-500 w-full animate-pulse'>&nbsp;</li>
+      )
+    }
+  </>
+)
 
 export const Empty = () => <p className='text-slate-300 text-sm'>No recent animations have been made.</p>
 
