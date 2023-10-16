@@ -25,7 +25,7 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <p className='text-slate-300 text-sm'>No recent animations have been made.</p>
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>
@@ -61,10 +61,7 @@ export const Success = ({
   }
 
   return (
-    <ul className="flex w-full flex-col gap-2 rounded-lg bg-gray-700 p-2">
-      <li className="text-md mb-2 text-white">
-        Recent animations for inspopiration 🧠
-      </li>
+    <>
       {recentAnimations.map((item) => {
         const entity = item.entities[0]
 
@@ -89,6 +86,6 @@ export const Success = ({
           </li>
         )
       })}
-    </ul>
+    </>
   )
 }

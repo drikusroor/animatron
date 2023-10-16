@@ -1,6 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
+import RecentAnimations from 'src/components/RecentAnimations/RecentAnimations'
 
-import RecentAnimationsCell from 'src/components/RecentAnimationsCell/RecentAnimationsCell'
 
 const FrontPage = () => {
   return (
@@ -29,7 +29,7 @@ const FrontPage = () => {
             </a>
           </div>
 
-          <RecentAnimationsCell />
+          <RecentAnimations />
         </div>
       </div>
     </>
