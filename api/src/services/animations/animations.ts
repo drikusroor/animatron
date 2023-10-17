@@ -19,7 +19,16 @@ export const animations: QueryResolvers['animations'] = () => {
   return db.animation.findMany()
 }
 
-export const recentAnimations: QueryResolvers['animations'] = async () => {
+export const recentAnimations: QueryResolvers['animations'] = async ({
+  input,
+}) => {
+  const {
+    orderBy = 'createdAt',
+    orderDirection = 'desc',
+    first = 10,
+    skip = 0,
+  } = input
+
   const recentRevisionIds = (
     await db.$queryRaw<{ id: number }[]>`
     WITH LatestAnimations AS (
@@ -41,8 +50,10 @@ export const recentAnimations: QueryResolvers['animations'] = async () => {
       },
     },
     orderBy: {
-      createdAt: 'desc',
+      [orderBy]: orderDirection,
     },
+    take: first,
+    skip,
   })
 
   return animations

@@ -1,7 +1,7 @@
 import { MetaTags } from '@redwoodjs/web'
+
 import RecentAnimations from 'src/components/RecentAnimations/RecentAnimations'
 import StartAnimatingSaga from 'src/components/StartAnimatingSaga/StartAnimatingSaga'
-
 
 const FrontPage = () => {
   return (
@@ -19,7 +19,6 @@ const FrontPage = () => {
             </p>
 
             <StartAnimatingSaga />
-
           </div>
 
           <RecentAnimations />

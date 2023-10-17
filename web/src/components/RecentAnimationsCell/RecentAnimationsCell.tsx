@@ -5,8 +5,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import EntityRenderer from '../EntityRenderer/EntityRenderer'
 
 export const QUERY = gql`
-  query RecentAnimationsQuery {
-    recentAnimations {
+  query RecentAnimationsQuery($input: RecentAnimationsInput!) {
+    recentAnimations(input: $input) {
       id
       animationHistoryId
       name
@@ -25,15 +25,17 @@ export const QUERY = gql`
 
 export const Loading = () => (
   <>
-    {
-      Array.from(Array(3)).map(() =>
-        <li className='rounded bg-slate-500 w-full animate-pulse'>&nbsp;</li>
-      )
-    }
+    {Array.from(Array(3)).map((li, index) => (
+      <li key={index} className="w-full animate-pulse rounded bg-slate-500">
+        &nbsp;
+      </li>
+    ))}
   </>
 )
 
-export const Empty = () => <p className='text-slate-300 text-sm'>No recent animations have been made.</p>
+export const Empty = () => (
+  <p className="text-sm text-slate-300">No recent animations have been made.</p>
+)
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>

@@ -33,6 +33,7 @@ export const schema = gql`
     createAnimationHistory(
       input: CreateAnimationHistoryInput!
     ): AnimationHistory! @requireAuth
+    createAnimationHistoryForStartAnimating: AnimationHistory! @requireAuth
     updateAnimationHistory(
       id: String!
       input: UpdateAnimationHistoryInput!
