@@ -8655,6 +8655,7 @@ __metadata:
   dependencies:
     "@redwoodjs/api": 6.1.0
     "@redwoodjs/graphql-server": 6.1.0
+    unique-names-generator: ^4.7.1
     uuid: ^9.0.0
   languageName: unknown
   linkType: soft
@@ -23265,6 +23266,13 @@ __metadata:
   dependencies:
     unique-slug: ^3.0.0
   checksum: 55d95cd670c4a86117ebc34d394936d712d43b56db6bc511f9ca00f666373818bf9f075fb0ab76bcbfaf134592ef26bb75aad20786c1ff1ceba4457eaba90fb8
+  languageName: node
+  linkType: hard
+
+"unique-names-generator@npm:^4.7.1":
+  version: 4.7.1
+  resolution: "unique-names-generator@npm:4.7.1"
+  checksum: db07b9a0fee6eac4a21cf567c9744ee97895aa744d51ec913557205173a65c1a7a4d12470295796acb7247e6646e7975c340bb634c7adf41e5d950fa5cf94375
   languageName: node
   linkType: hard
 
