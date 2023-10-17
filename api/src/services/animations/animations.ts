@@ -53,6 +53,7 @@ export const recentAnimations: QueryResolvers['animations'] = async ({
       [orderBy]: orderDirection,
     },
     take: first,
+    skip,
   })
 
   return animations

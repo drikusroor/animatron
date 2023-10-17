@@ -13,8 +13,9 @@ const UPDATE_ANIMATION_MUTATION = gql`
 `
 
 const StartAnimatingSaga = () => {
-  const [createAnimationHistoryForStartAnimating, { loading, error }] =
-    useMutation(UPDATE_ANIMATION_MUTATION, {
+  const [createAnimationHistoryForStartAnimating, { loading }] = useMutation(
+    UPDATE_ANIMATION_MUTATION,
+    {
       onCompleted: (data) => {
         const {
           id,
@@ -22,10 +23,11 @@ const StartAnimatingSaga = () => {
         } = data.createAnimationHistoryForStartAnimating
         navigate(routes.animation({ animationHistoryId: id, version }))
       },
-      onError: (error) => {
+      onError: () => {
         console.log('onError')
       },
-    })
+    }
+  )
 
   return (
     <button
