@@ -26,8 +26,8 @@ export const QUERY = gql`
 export const Loading = () => (
   <>
     {
-      Array.from(Array(3)).map(() =>
-        <li className='rounded bg-slate-500 w-full animate-pulse'>&nbsp;</li>
+      Array.from(Array(3)).map((li, index) =>
+        <li key={index} className='rounded bg-slate-500 w-full animate-pulse'>&nbsp;</li>
       )
     }
   </>
