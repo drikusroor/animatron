@@ -3,7 +3,6 @@ import type {
   MutationResolvers,
   AnimationHistoryRelationResolvers,
 } from 'types/graphql'
-
 import { uniqueNamesGenerator, adjectives } from 'unique-names-generator'
 
 import { db } from 'src/lib/db'
@@ -32,7 +31,7 @@ export const createAnimationHistoryForStartAnimating: MutationResolvers['createA
   () => {
     return db.animationHistory.create({
       data: {
-        name: uniqueNamesGenerator({ dictionaries: [adjectives]}),
+        name: uniqueNamesGenerator({ dictionaries: [adjectives] }),
         description: '',
         revisions: {
           create: [

@@ -1,5 +1,5 @@
-import { navigate, routes } from "@redwoodjs/router"
-import { useMutation } from "@redwoodjs/web"
+import { navigate, routes } from '@redwoodjs/router'
+import { useMutation } from '@redwoodjs/web'
 
 const UPDATE_ANIMATION_MUTATION = gql`
   mutation CreateAnimationHistoryForStartAnimatingMutation {
@@ -13,19 +13,19 @@ const UPDATE_ANIMATION_MUTATION = gql`
 `
 
 const StartAnimatingSaga = () => {
-
-  const [createAnimationHistoryForStartAnimating, { loading, error }] = useMutation(
-    UPDATE_ANIMATION_MUTATION,
-    {
+  const [createAnimationHistoryForStartAnimating, { loading, error }] =
+    useMutation(UPDATE_ANIMATION_MUTATION, {
       onCompleted: (data) => {
-        const {id , revisions: [{version}]} = data.createAnimationHistoryForStartAnimating
+        const {
+          id,
+          revisions: [{ version }],
+        } = data.createAnimationHistoryForStartAnimating
         navigate(routes.animation({ animationHistoryId: id, version }))
       },
       onError: (error) => {
-        console.log("onError")
+        console.log('onError')
       },
-    }
-  )
+    })
 
   return (
     <button
@@ -36,9 +36,9 @@ const StartAnimatingSaga = () => {
       disabled={loading}
     >
       Start animating&nbsp;
-      <div
-        className="inline-block group-hover:scale-110 group-hover:rotate-12 transition-transform"
-      >💪</div>
+      <div className="inline-block transition-transform group-hover:rotate-12 group-hover:scale-110">
+        💪
+      </div>
     </button>
   )
 }
