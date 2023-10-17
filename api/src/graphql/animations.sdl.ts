@@ -15,13 +15,7 @@ export const schema = gql`
 
   type Query {
     animations: [Animation!]! @requireAuth
-    recentAnimations(
-      groupBy: String
-      orderBy: String
-      orderDirection: OrderDirection
-      first: Int
-      skip: Int
-    ): [Animation!]! @requireAuth
+    recentAnimations(input: RecentAnimationsInput): [Animation!]! @requireAuth
     animation(id: Int!): Animation @requireAuth
     animationByHistoryIdAndVersion(
       animationHistoryId: String!
@@ -50,6 +44,13 @@ export const schema = gql`
     uuid: String
     animationHistoryId: String!
     version: Int
+  }
+
+  input RecentAnimationsInput {
+    first: Int
+    skip: Int
+    orderBy: String
+    orderDirection: OrderDirection
   }
 
   type Mutation {
