@@ -17,7 +17,6 @@ export interface DialogProps {
 }
 
 const Dialog = ({
-  id,
   title,
   body,
   confirmButtonText,
