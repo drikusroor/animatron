@@ -8,14 +8,15 @@ interface DeleteTrackButtonProps {
 }
 
 const DeleteTrackButton = ({ track }: DeleteTrackButtonProps) => {
+  const openDialog = useBoundStore((state) => state.addDialog)
   const removeTrack = useBoundStore((state) => state.removeTrack)
 
   const onClick = () => {
-    if (
-      confirm(`Are you sure you want to delete this track (${track.name})?`)
-    ) {
-      removeTrack(track)
-    }
+    openDialog({
+      body: `Are you sure you want to delete this track ${track.name}?`,
+      onConfirm: () => removeTrack(track),
+      confirmButtonText: 'Delete',
+    })
   }
 
   return (

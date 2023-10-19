@@ -35,12 +35,10 @@ const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
     }),
   removeTrack: (track: ITrack) =>
     set((state) => {
-      const indexOf = state.tracks.indexOf(track)
-
-      if (indexOf === -1) return state
-
-      state.tracks.splice(indexOf, 1)
-      return state
+      return {
+        ...state,
+        tracks: state.tracks.filter((t) => t !== track),
+      }
     }),
   updateTrack: (track: ITrack) =>
     set((state) => {
