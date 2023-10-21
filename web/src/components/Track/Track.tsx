@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react'
 
+import { FaExclamationTriangle } from 'react-icons/fa'
+
 import classNames from 'src/helpers/classNames'
 import { useBoundStore } from 'src/store'
 import { ISelection } from 'src/store/selection'
@@ -109,8 +111,9 @@ const Track = ({
           {eligibleForAddingClip ? (
             <NewClipGhost />
           ) : (
-            <span className="text-xs text-gray-300">
-              Please select a clip before adding a clip
+            <span className="flex flex-row items-center gap-1 rounded bg-gray-900 p-1 text-xs text-gray-300">
+              <FaExclamationTriangle />
+              Please select an entity
             </span>
           )}
         </div>
