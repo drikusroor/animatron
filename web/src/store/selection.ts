@@ -1,5 +1,8 @@
 import { StateCreator } from 'zustand'
 
+import { IClip } from 'src/types/clip.interface'
+import { IEntity } from 'src/types/entity.interface'
+import { IKeyframe } from 'src/types/keyframe.interface'
 import { ITrack } from 'src/types/track.interface'
 
 import { IRootState } from '.'
@@ -14,6 +17,49 @@ export interface ISelection {
 export interface ISelectionState {
   selection: ISelection | null
   select: (newSelection: ISelection | null) => void
+  getSelectedItem: () =>
+    | { entity: IEntity }
+    | { track: ITrack }
+    | { track: ITrack; clip: IClip }
+    | { track: ITrack; clip: IClip; keyframe: IKeyframe }
+}
+
+const findEntity = (entities: IEntity[], currentSelection: ISelection) => {
+  const { path } = currentSelection
+
+  const [entityIndex] = path
+
+  const entity = entities[entityIndex]
+
+  return {
+    entity,
+  }
+}
+
+const findTrack = (entities: ITrack[], currentSelection: ISelection) => {
+  const { path } = currentSelection
+
+  const [trackIndex] = path
+
+  const track = entities[trackIndex]
+
+  return {
+    track,
+  }
+}
+
+const findClip = (tracks: ITrack[], currentSelection: ISelection) => {
+  const { path } = currentSelection
+
+  const [trackIndex, clipIndex] = path
+
+  const track = tracks[trackIndex]
+  const clip = track.clips[clipIndex]
+
+  return {
+    track,
+    clip,
+  }
 }
 
 const findKeyframe = (tracks: ITrack[], currentSelection: ISelection) => {
@@ -44,6 +90,10 @@ const createSelectionSlice: StateCreator<
     const selection = get().selection
 
     switch (selection.type) {
+      case 'entity':
+        return findEntity(get().entities, selection)
+      case 'track':
+      case 'clip':
       case 'keyframe':
         return findKeyframe(get().tracks, selection)
       default:
