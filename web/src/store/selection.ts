@@ -14,14 +14,20 @@ export interface ISelection {
   type: TSelectionType
 }
 
+export interface ISelectedEntity {
+  entity: IEntity
+}
+
+export interface ISelectedKeyframe {
+  track: ITrack
+  clip: IClip
+  keyframe: IKeyframe
+}
+
 export interface ISelectionState {
   selection: ISelection | null
   select: (newSelection: ISelection | null) => void
-  getSelectedItem: () =>
-    | { entity: IEntity }
-    | { track: ITrack }
-    | { track: ITrack; clip: IClip }
-    | { track: ITrack; clip: IClip; keyframe: IKeyframe }
+  getSelectedItem: () => ISelectedEntity | ISelectedKeyframe
 }
 
 const findEntity = (entities: IEntity[], currentSelection: ISelection) => {
@@ -33,32 +39,6 @@ const findEntity = (entities: IEntity[], currentSelection: ISelection) => {
 
   return {
     entity,
-  }
-}
-
-const findTrack = (entities: ITrack[], currentSelection: ISelection) => {
-  const { path } = currentSelection
-
-  const [trackIndex] = path
-
-  const track = entities[trackIndex]
-
-  return {
-    track,
-  }
-}
-
-const findClip = (tracks: ITrack[], currentSelection: ISelection) => {
-  const { path } = currentSelection
-
-  const [trackIndex, clipIndex] = path
-
-  const track = tracks[trackIndex]
-  const clip = track.clips[clipIndex]
-
-  return {
-    track,
-    clip,
   }
 }
 

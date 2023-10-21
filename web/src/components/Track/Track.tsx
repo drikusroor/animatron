@@ -3,12 +3,11 @@ import { useRef, useState } from 'react'
 import { FaExclamationTriangle } from 'react-icons/fa'
 
 import classNames from 'src/helpers/classNames'
-import { useBoundStore } from 'src/store'
-import { ISelection } from 'src/store/selection'
+import { IRootState, useBoundStore } from 'src/store'
+import { ISelectedEntity } from 'src/store/selection'
 import { IClipInput } from 'src/types/clip.interface'
-import { IEntity } from 'src/types/entity.interface'
 import { IKeyframeInput } from 'src/types/keyframe.interface'
-import { ITrack, ITrackInput } from 'src/types/track.interface'
+import { ITrack } from 'src/types/track.interface'
 
 import Clip from '../Clip/Clip'
 import NewClipGhost from '../NewClipGhost/NewClipGhost'
@@ -17,18 +16,22 @@ interface ITrackProps {
   track: ITrack
   height?: number
   path: number[]
-  select: (selection: ISelection) => void
-  selection: ISelection
+  select: IRootState['select']
+  selection: IRootState['selection']
   zoom: number
+  addClip: IRootState['addClip']
+  getSelectedItem: IRootState['getSelectedItem']
 }
 
-const Track = ({
+const PureTrack = ({
   track,
   height,
   path,
   select,
   selection,
   zoom,
+  addClip,
+  getSelectedItem,
 }: ITrackProps) => {
   const backgroundColorStyle = track.color
     ? { backgroundColor: track.color }
@@ -36,8 +39,6 @@ const Track = ({
   const heightStyle = height ? { height: `${height}px` } : {}
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
   const trackDivRef = useRef<HTMLDivElement | null>(null)
-  const addClip = useBoundStore((state) => state.addClip)
-  const getSelected = useBoundStore((state) => state.getSelectedItem)
 
   const eligibleForAddingClip = selection?.type === 'entity'
 
@@ -64,9 +65,8 @@ const Track = ({
         css: '',
       }
 
-      const animationEntityUuid = (getSelected() as { entity: IEntity }).entity
+      const animationEntityUuid = (getSelectedItem() as ISelectedEntity).entity
         .uuid
-      console.log({ animationEntityUuid })
 
       const newClipInput: IClipInput = {
         start: x,
@@ -119,6 +119,15 @@ const Track = ({
         </div>
       </div>
     </div>
+  )
+}
+
+export const Track = (props) => {
+  const addClip = useBoundStore((state) => state.addClip)
+  const getSelectedItem = useBoundStore((state) => state.getSelectedItem)
+
+  return (
+    <PureTrack addClip={addClip} getSelectedItem={getSelectedItem} {...props} />
   )
 }
 
