@@ -12,6 +12,7 @@ export interface ITracksState {
   addClip: (track?: ITrack, input: IClipInput) => void
   removeTrack: (track: ITrack) => void
   updateTrack: (track: ITrack, update: ITrackInput) => void
+  updateClip: (track: ITrack, clip: IClipInput) => void
   updateKeyframe: (keyframe: IKeyframe, path?: number[]) => void
   setTracks: (tracks: ITrack[]) => void
 }
@@ -72,6 +73,30 @@ const createTracksSlice: StateCreator<IRootState, [], [], ITracksState> = (
 
       const tracks = state.tracks
       tracks[indexOf] = { ...track, ...update }
+
+      return {
+        ...state,
+        tracks,
+      }
+    }),
+  updateClip: (track: ITrack, clip: IClipInput) =>
+    set((state) => {
+      const indexOf = state.tracks.indexOf(track)
+
+      if (indexOf === -1) return state
+
+      const tracks = [...state.tracks]
+      const clips = [...tracks[indexOf].clips]
+      const clipIndex = clips.findIndex((c) => c.id === clip.id)
+
+      if (clipIndex === -1) return state
+
+      clips[clipIndex] = clip
+
+      tracks[indexOf] = {
+        ...track,
+        clips,
+      }
 
       return {
         ...state,

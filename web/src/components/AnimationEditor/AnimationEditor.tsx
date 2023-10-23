@@ -9,6 +9,7 @@ import { IEntity } from 'src/types/entity.interface'
 import { ITrack } from 'src/types/track.interface'
 
 import AddNewEntityContainer from '../AddNewEntityContainer/AddNewEntityContainer'
+import ClipEditorContainer from '../ClipEditorContainer/ClipEditorContainer'
 import EntityEditorContainer from '../EntityEditorContainer/EntityEditorContainer'
 import EntityListContainer from '../EntityListContainer/EntityListContainer'
 import KeyframeEditorContainer from '../KeyframeEditorContainer/KeyframeEditorContainer'
@@ -63,6 +64,7 @@ const AnimationEditor = ({ onSave }: AnimationEditorProps) => {
       </div>
       <div className="flex h-screen w-full flex-col justify-end border-e">
         <EntityEditorContainer />
+        <ClipEditorContainer />
         <KeyframeEditorContainer />
         <TrackManager />
       </div>

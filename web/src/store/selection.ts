@@ -18,6 +18,11 @@ export interface ISelectedEntity {
   entity: IEntity
 }
 
+export interface ISelectedClip {
+  track: ITrack
+  clip: IClip
+}
+
 export interface ISelectedKeyframe {
   track: ITrack
   clip: IClip
@@ -28,6 +33,8 @@ export interface ISelectionState {
   selection: ISelection | null
   select: (newSelection: ISelection | null) => void
   getSelectedItem: () => ISelectedEntity | ISelectedKeyframe
+  getSelectedTrack: () => ITrack
+  getSelectedClip: () => ISelectedClip
 }
 
 const findEntity = (entities: IEntity[], currentSelection: ISelection) => {
@@ -78,6 +85,35 @@ const createSelectionSlice: StateCreator<
         return findKeyframe(get().tracks, selection)
       default:
         return null
+    }
+  },
+  getSelectedTrack: () => {
+    const selection = get().selection
+
+    if (selection?.type !== 'track') {
+      return null
+    }
+
+    const [trackIndex] = selection.path
+
+    return get().tracks[trackIndex]
+  },
+  getSelectedClip: () => {
+    const selection = get().selection
+
+    if (selection?.type !== 'clip') {
+      return null
+    }
+
+    const [trackIndex, clipIndex] = selection.path
+
+    const track = get().tracks[trackIndex]
+
+    const clip = get().tracks[trackIndex].clips[clipIndex]
+
+    return {
+      track,
+      clip,
     }
   },
 })
