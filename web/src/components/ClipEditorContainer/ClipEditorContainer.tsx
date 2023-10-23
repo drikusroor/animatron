@@ -1,5 +1,4 @@
 import { useBoundStore } from 'src/store'
-import { ISelectedKeyframe } from 'src/store/selection'
 
 import ClipEditor from '../ClipEditor/ClipEditor'
 
@@ -10,7 +9,6 @@ const ClipEditorContainer = () => {
   const select = useBoundStore((state) => state.select)
   const deselectClip = () => select(null)
 
-  const tracks = useBoundStore((state) => state.tracks)
   const updateClip = useBoundStore((state) => state.updateClip)
 
   if (currentSelection?.type !== 'clip') return null

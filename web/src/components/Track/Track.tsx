@@ -53,11 +53,17 @@ const PureTrack = ({
   }
 
   const handleTrackClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent
   ) => {
     if (trackDivRef.current) {
       const rect = trackDivRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left // get the x position inside the div
+
+      // later we might want to append it to the end of the track
+      let x = 0
+
+      if (e instanceof MouseEvent) {
+        x = e.clientX - rect.left // get the x position inside the div
+      }
 
       const newKeyframeInput: IKeyframeInput = {
         sort: 0,
@@ -91,6 +97,9 @@ const PureTrack = ({
         ref={trackDivRef}
         onMouseMove={handleTrackMouseMove}
         onClick={eligibleForAddingClip ? handleTrackClick : () => void 0}
+        onKeyDown={(e) => (e.key === 'Enter' ? handleTrackClick(e) : void 0)}
+        tabIndex={0}
+        role="button"
       >
         {track.clips.map((clip, index) => (
           <Clip

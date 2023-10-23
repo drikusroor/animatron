@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { FaTimes } from 'react-icons/fa'
 
 import { IClip } from 'src/types/clip.interface'
-import { ITrack } from 'src/types/track.interface'
 
 interface ClipEditorProps {
   clip: IClip
