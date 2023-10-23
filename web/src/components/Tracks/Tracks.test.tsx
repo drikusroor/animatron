@@ -7,8 +7,11 @@ import Tracks from './Tracks'
 
 describe('Tracks', () => {
   it('renders successfully', () => {
+    const scrollRef = { current: document.createElement('div') }
+    const handleScroll = jest.fn()
+
     expect(() => {
-      render(<Tracks />)
+      render(<Tracks scrollRef={scrollRef} handleScroll={handleScroll} />)
     }).not.toThrow()
   })
 })
